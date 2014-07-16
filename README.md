@@ -43,4 +43,10 @@ this will rebuild the app once you edit the source code
 
 to edit target Phonegap Directory, PORT, or Phonegap Plugins look at app/gulpfile.js
 
+
+Server
+======
+The server part is just sitting there as a motivation!
+
+
 [1]: https://github.com/phonegap/phonegap-app-developer
