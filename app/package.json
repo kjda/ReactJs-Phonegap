@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "first-run": "phonegap create phonegap-app & npm install & bower install & gulp build-app",
-    "serve": "cd phonegap-app & phonegap serve --port=3131"
+    "setup": "sudo npm install phonegap -g & npm install & bower install"
   },
   "author": "Khaled Jouda",
   "license": "ISC",
