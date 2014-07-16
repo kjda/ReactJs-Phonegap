@@ -102,11 +102,8 @@ var App = React.createClass({
 			page: pageClass,
 			routeParams: routeParams,
 			path: path,
-			pageTitle: '',
-			locale: this.state.locale,
-			forceUpdate: this.onForceUpdate
+			pageTitle: ''
 		});
-		this.forceUpdate();
 	},
 
 	setPageTitle: function(title){
@@ -147,15 +144,10 @@ var App = React.createClass({
 	getDeviceUuid: function() {
 		return window.device.uuid;
 	},
-
-	onForceUpdate: function(){
-		this.forceUpdate();
-		return false;
-	},
 	
 	render: function(){
-		if( !this.state.page || !this.state.ready ){
-			return <div>waiting for user to load</div>;
+		if( !this.state.ready || !this.state.page ){
+			return <div>loadin...</div>;
 		}
 		if( this.state.offline ){
 			return this.renderWhenOffline();
@@ -164,8 +156,7 @@ var App = React.createClass({
 		var page = new this.state.page({
 			routeParams: routeParams,
 			user: this.user,
-			setPageTitle: this.setPageTitle,
-			forceUpdate: this.onForceUpdate
+			setPageTitle: this.setPageTitle
 		});
 		if( !this.user.isAuth() ){
 			return (<LayoutPublic page={page} />);
