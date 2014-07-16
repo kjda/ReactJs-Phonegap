@@ -46,6 +46,9 @@
  	},
  	
  	navigate: function(fragment){
+ 		if( !this.router ) {
+ 			throw new Error('Router was not initiated');
+ 		}
  		this.router.navigate(fragment, {trigger: true});
  	},
 
