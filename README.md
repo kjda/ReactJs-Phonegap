@@ -3,6 +3,7 @@ ReactJs-Phonegap
 
 A boilerplate ReactJS-Phonegap App
 
+![screenshot](https://raw.githubusercontent.com/kjda/ReactJs-Phonegap/master/screenshot0.jpg)
 
 How to use?
 ===========
