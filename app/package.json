@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "setup": "sudo npm install phonegap -g & npm install & bower install"
+    "setup": "npm install & bower install"
   },
   "author": "Khaled Jouda",
   "license": "ISC",
