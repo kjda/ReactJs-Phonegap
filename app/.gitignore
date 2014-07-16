@@ -1,3 +1,4 @@
 build
 node_modules
 phonegap-app
+assets-src/bower
