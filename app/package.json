@@ -2,12 +2,11 @@
   "name": "ReactCordovaApp",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "setup": "npm install & bower install"
   },
   "author": "Khaled Jouda",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "gulp": "^3.6.2",
     "gulp-browserify": "^0.5.0",
