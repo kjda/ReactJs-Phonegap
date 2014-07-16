@@ -1,0 +1,51 @@
+{
+  "name": "iscroll-sticky",
+  "description": "iOS-style sticky headers with iScroll 5",
+  "version": "0.1.1",
+  "homepage": "https://github.com/excellenteasy/iscroll-sticky",
+  "author": "excellenteasy <dev@excellenteasy.com>",
+  "contributors": [
+    {
+      "name": "David Pfahler",
+      "email": "david@excellenteasy.com"
+    },
+    {
+      "name": "Stephan Bönnemann",
+      "email": "stephan@excellenteasy.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/excellenteasy/iscroll-sticky.git"
+  },
+  "bugs": {
+    "url": "https://github.com/excellenteasy/iscroll-sticky/issues"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4"
+  },
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-coffeelint": "0.0.7",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-coffee": "0.7.0",
+    "grunt-contrib-watch": "0.2.0",
+    "grunt-shell": "~0.3.0",
+    "matchdep": "~0.1.2",
+    "semver-sync": "~1.2.0",
+    "grunt-bower-task": "0.2.3",
+    "grunt-conventional-changelog": "git://github.com/btford/grunt-conventional-changelog.git#aa77460"
+  },
+  "keywords": [
+    "iscroll",
+    "iscroll5",
+    "sticky",
+    "stickyheaders"
+  ]
+}

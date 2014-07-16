@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+  <head>
+    <title>iscroll-sticky demo</title>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Helvetica, Arial;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+      .list ul > li {
+        padding: 10px;
+        border-top: 1px solid #AAA;
+      }
+      h1 {
+        background: #CD235C;
+        color: #eee;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 0 10px;
+        margin: 0;
+        opacity: .8;
+      }
+      #scroll {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scroll">
+      <ul class="list">
+        <li>
+            <h1>A</h1>
+            <ul>
+                <li>Aa</li>
+                <li>Aa</li>
+                <li>Aa</li>
+                <li>Aa</li>
+                <li>Aa</li>
+            </ul>
+        </li>
+        <li>
+            <h1>B</h1>
+            <ul>
+                <li>Bb</li>
+                <li>Bb</li>
+                <li>Bb</li>
+                <li>Bb</li>
+                <li>Bb</li>
+            </ul>
+        </li>
+        <li>
+            <h1>C</h1>
+            <ul>
+                <li>Cc</li>
+                <li>Cc</li>
+                <li>Cc</li>
+                <li>Cc</li>
+                <li>Cc</li>
+            </ul>
+        </li>
+        <li>
+            <h1>D</h1>
+            <ul>
+                <li>Dd</li>
+                <li>Dd</li>
+                <li>Dd</li>
+                <li>Dd</li>
+                <li>Dd</li>
+            </ul>
+        </li>
+        <li>
+            <h1>E</h1>
+            <ul>
+                <li>Ee</li>
+                <li>Ee</li>
+                <li>Ee</li>
+                <li>Ee</li>
+                <li>Ee</li>
+            </ul>
+        </li>
+        <li>
+            <h1>F</h1>
+            <ul>
+                <li>Ff</li>
+                <li>Ff</li>
+                <li>Ff</li>
+                <li>Ff</li>
+                <li>Ff</li>
+            </ul>
+        </li>
+        <li>
+            <h1>G</h1>
+            <ul>
+                <li>Gg</li>
+                <li>Gg</li>
+                <li>Gg</li>
+                <li>Gg</li>
+                <li>Gg</li>
+            </ul>
+        </li>
+        <li>
+            <h1>H</h1>
+            <ul>
+                <li>Hh</li>
+                <li>Hh</li>
+                <li>Hh</li>
+                <li>Hh</li>
+                <li>Hh</li>
+            </ul>
+        </li>
+        <li>
+            <h1>I</h1>
+            <ul>
+                <li>Ii</li>
+                <li>Ii</li>
+                <li>Ii</li>
+                <li>Ii</li>
+                <li>Ii</li>
+            </ul>
+        </li>
+        <li>
+            <h1>J</h1>
+            <ul>
+                <li>Jj</li>
+                <li>Jj</li>
+                <li>Jj</li>
+                <li>Jj</li>
+                <li>Jj</li>
+            </ul>
+        </li>
+        <li>
+            <h1>K</h1>
+            <ul>
+                <li>Kk</li>
+                <li>Kk</li>
+                <li>Kk</li>
+                <li>Kk</li>
+                <li>Kk</li>
+            </ul>
+        </li>
+        <li>
+            <h1>L</h1>
+            <ul>
+                <li>Ll</li>
+                <li>Ll</li>
+                <li>Ll</li>
+                <li>Ll</li>
+                <li>Ll</li>
+            </ul>
+        </li>
+        <li>
+            <h1>M</h1>
+            <ul>
+                <li>Mm</li>
+                <li>Mm</li>
+                <li>Mm</li>
+                <li>Mm</li>
+                <li>Mm</li>
+            </ul>
+        </li>
+        <li>
+            <h1>N</h1>
+            <ul>
+                <li>Nn</li>
+                <li>Nn</li>
+                <li>Nn</li>
+                <li>Nn</li>
+                <li>Nn</li>
+            </ul>
+        </li>
+        <li>
+            <h1>O</h1>
+            <ul>
+                <li>Oo</li>
+                <li>Oo</li>
+                <li>Oo</li>
+                <li>Oo</li>
+                <li>Oo</li>
+            </ul>
+        </li>
+        <li>
+            <h1>P</h1>
+            <ul>
+                <li>Pp</li>
+                <li>Pp</li>
+                <li>Pp</li>
+                <li>Pp</li>
+                <li>Pp</li>
+            </ul>
+        </li>
+        <li>
+            <h1>Q</h1>
+            <ul>
+                <li>Qq</li>
+                <li>Qq</li>
+                <li>Qq</li>
+                <li>Qq</li>
+                <li>Qq</li>
+            </ul>
+        </li>
+        <li>
+            <h1>R</h1>
+            <ul>
+                <li>Rr</li>
+                <li>Rr</li>
+                <li>Rr</li>
+                <li>Rr</li>
+                <li>Rr</li>
+            </ul>
+        </li>
+        <li>
+            <h1>S</h1>
+            <ul>
+                <li>Ss</li>
+                <li>Ss</li>
+                <li>Ss</li>
+                <li>Ss</li>
+                <li>Ss</li>
+            </ul>
+        </li>
+        <li>
+            <h1>T</h1>
+            <ul>
+                <li>Tt</li>
+                <li>Tt</li>
+                <li>Tt</li>
+                <li>Tt</li>
+                <li>Tt</li>
+            </ul>
+        </li>
+        <li>
+            <h1>U</h1>
+            <ul>
+                <li>Uu</li>
+                <li>Uu</li>
+                <li>Uu</li>
+                <li>Uu</li>
+                <li>Uu</li>
+            </ul>
+        </li>
+        <li>
+            <h1>V</h1>
+            <ul>
+                <li>Vv</li>
+                <li>Vv</li>
+                <li>Vv</li>
+                <li>Vv</li>
+                <li>Vv</li>
+            </ul>
+        </li>
+        <li>
+            <h1>W</h1>
+            <ul>
+                <li>Ww</li>
+                <li>Ww</li>
+                <li>Ww</li>
+                <li>Ww</li>
+                <li>Ww</li>
+            </ul>
+        </li>
+        <li>
+            <h1>X</h1>
+            <ul>
+                <li>Xx</li>
+                <li>Xx</li>
+                <li>Xx</li>
+                <li>Xx</li>
+                <li>Xx</li>
+            </ul>
+        </li>
+      </ul>
+    </div>
+    <script type="text/javascript" src="https://rawgithub.com/cubiq/iscroll/master/build/iscroll-probe.js"></script>
+    <script type="text/javascript" src="../dist/iscroll-sticky.js"></script>
+    <script type="text/javascript">
+      var scroll = new IScroll('#scroll', { probeType: 3 });
+      new IScrollSticky(scroll, 'h1');
+    </script>
+  </body>
+</html>

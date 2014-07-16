@@ -1,0 +1,36 @@
+{
+  "name": "ReactCordovaApp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "first-run": "phonegap create phonegap-app & npm install & bower install & gulp build-app",
+    "serve": "cd phonegap-app & phonegap serve --port=3131"
+  },
+  "author": "Khaled Jouda",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.6.2",
+    "gulp-browserify": "^0.5.0",
+    "gulp-react": "^0.3.3",
+    "react": "^0.10.0",
+    "react-tools": "^0.10.0",
+    "bower": "^1.3.3",
+    "fastclick": "^1.0.2",
+    "gulp-run-sequence": "^0.3.2",
+    "gulp-concat": "^2.2.0",
+    "gulp-minify-css": "^0.3.4",
+    "gulp-uglify": "^0.3.0",
+    "gulp-plumber": "^0.6.2",
+    "gulp-watch": "^0.6.5",
+    "gulp-notify": "^1.3.0",
+    "gulp-less": "^1.2.3",
+    "gulp-jsvalidate": "^0.2.0",
+    "underscore": "^1.6.0",
+    "backbone": "^1.1.2",
+    "jquery": "^2.1.1",
+    "gulp-clean": "~0.3.1",
+    "gulp-shell": "~0.2.8",
+    "gulp-notify-growl": "~1.0.2"
+  }
+}

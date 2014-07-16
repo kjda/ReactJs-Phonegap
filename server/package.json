@@ -1,0 +1,26 @@
+{
+  "name": "React-Phonegap-Server",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "PORT=3000 node-dev ./bin/www"
+  },
+  "dependencies": {
+    "express": "~3.4.8",
+    "static-favicon": "~1.0.0",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "ejs": "~0.8.5",
+    "less-middleware": "0.1.15",
+    "mongoose": "~3.8.13",
+    "mongoose-validator": "~1.0.0",
+    "validator": "~3.16.1",
+    "async": "~0.9.0",
+    "bcrypt": "~0.7.8",
+    "u": "~0.1.0",
+    "passport": "~0.2.0",
+    "passport-local": "~1.0.0"
+  }
+}

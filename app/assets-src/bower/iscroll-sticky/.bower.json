@@ -1,0 +1,18 @@
+{
+  "name": "iscroll-sticky",
+  "version": "0.1.1",
+  "dependencies": {
+    "iscroll": "5.x"
+  },
+  "homepage": "https://github.com/excellenteasy/iscroll-sticky",
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.1",
+    "commit": "ce9ef0e100c2d1895e229a82ff3ee176669ac845"
+  },
+  "_source": "git://github.com/excellenteasy/iscroll-sticky.git",
+  "_target": "~0.1.1",
+  "_originalSource": "iscroll-sticky",
+  "_direct": true
+}
