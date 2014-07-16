@@ -18,7 +18,7 @@ module.exports = React.createClass({
 	    
 	  });
 		setTimeout(this.refreshScroller, 0);
-		//$(window).on('resize', this.refreshScroller);
+		$(window).on('resize', this.refreshScroller);
 		this.scroller.on('scrollEnd', function () {
 			if(Math.abs(this.scroller.maxScrollY) - Math.abs(this.scroller.y) < 200){
 				!!this.props.onScrollToBottom && this.props.onScrollToBottom();
@@ -33,7 +33,7 @@ module.exports = React.createClass({
 	componentWillUnmount: function(){
 		this.scroller.off('scrollEnd');
 		this.scroller.destroy();
-		//$(window).off('resize');
+		$(window).off('resize');
 	},
 
 	refreshScroller: function(){
