@@ -10,22 +10,22 @@ var Offline = require('./pages/offline');
 var translator = require('./i18n').translator;
 
 var DummyUser = {
-		data: {
-			id: 1,
-			username: 'Max Mustermann',
-		},
-		getData: function(){
-			return this.data;
-		},
-		getSid: function(){
-			return 'SESSION ID 1';
-		},
-		isAuth: function(){
-			return true;
-		},
-		clearSession: function(){
+	data: {
+		id: 1,
+		username: 'Max Mustermann',
+	},
+	getData: function(){
+		return this.data;
+	},
+	getSid: function(){
+		return 'SESSION ID 1';
+	},
+	isAuth: function(){
+		return true;
+	},
+	clearSession: function(){
 
-		}
+	}
 };
 
 var App = React.createClass({
@@ -63,18 +63,18 @@ var App = React.createClass({
 
 	handleBackButton: function(){
 		switch( this.state.path ){
- 			case '':
- 				this.confirm('Exit app?', this.exit)
- 				break;
- 			case 'login':
- 			case 'signup':
- 			case 'settings':
- 				this.router.navigate('/');
- 				break;
- 			default:
- 				this.router.back();
- 				break;
- 		}
+			case '':
+			this.confirm('Exit app?', this.exit)
+			break;
+			case 'login':
+			case 'signup':
+			case 'settings':
+			this.router.navigate('/');
+			break;
+			default:
+			this.router.back();
+			break;
+		}
 	},
 	
 	onOffline: function(){
@@ -145,8 +145,8 @@ var App = React.createClass({
 	},
 	
 	getDeviceUuid: function() {
-    return window.device.uuid;
-  },
+		return window.device.uuid;
+	},
 
 	onForceUpdate: function(){
 		this.forceUpdate();
@@ -180,23 +180,25 @@ var App = React.createClass({
 	},
 	renderWhenOffline: function(){
 		var offlinePage = new Offline({
-				routeParams: {},
-				user: this.user
-			});
-			return (<div>{offlinePage}</div>);
+			routeParams: {},
+			user: this.user
+		});
+		return (<div>{offlinePage}</div>);
 	}
 });
 
 
 function startApp(){
-	React.renderComponent(new App(), document.getElementById('__wrap'));	
+	React.renderComponent(new App(), document.body);	
 }
 
-var url = document.URL;
-var isSmart = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
-if( isSmart ){
-	document.addEventListener('deviceready', startApp, false);
-}
-else{
-	startApp();
+window.onload= function(){
+	var url = document.URL;
+	var isSmart = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
+	if( isSmart ){
+		document.addEventListener('deviceready', startApp, false);
+	}
+	else{
+		startApp();
+	}
 }
