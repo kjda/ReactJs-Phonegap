@@ -3,7 +3,7 @@ module.exports = {
 	phonegapServePort: 3131,
 	app: {
 		namespace: 'com.kjda.reactjs.phonegap',
-		version: '0.0.2',
+		version: '0.0.1',
 		name: 'ReactJs-Phonegap App',
 		description: 'A boilerplate ReactJs-Phonegap App!',
 		author: {
