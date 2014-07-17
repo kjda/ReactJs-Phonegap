@@ -29,6 +29,7 @@
     "jquery": "^2.1.1",
     "gulp-clean": "~0.3.1",
     "gulp-shell": "~0.2.8",
-    "gulp-notify-growl": "~1.0.2"
+    "gulp-notify-growl": "~1.0.2",
+    "gulp-replace": "^0.4.0"
   }
 }
