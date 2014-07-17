@@ -10,94 +10,93 @@ var Offline = require('./pages/offline');
 var translator = require('./i18n').translator;
 
 var DummyUser = {
-	data: {
-		id: 1,
-		username: 'Max Mustermann',
-	},
-	getData: function(){
-		return this.data;
-	},
-	getSid: function(){
-		return 'SESSION ID 1';
-	},
-	isAuth: function(){
-		return true;
-	},
-	clearSession: function(){
+  data: {
+    id: 1,
+    username: 'Max Mustermann'
+  },
+  getData: function(){
+    return this.data;
+  },
+  getSid: function(){
+    return 'SESSION ID 1';
+  },
+  isAuth: function(){
+    return true;
+  },
+  clearSession: function(){
 
-	}
+  }
 };
 
 var App = React.createClass({
 
-	mixins: [Dialogs, PushNotifications],
+  mixins: [Dialogs, PushNotifications],
 	
-	user: DummyUser,
+  user: DummyUser,
 	
-	router: require('./util/router'),
+  router: require('./util/router'),
 	
-	routes: require('./routes'),
+  routes: require('./routes'),
 
-	getInitialState: function(){
-		return {
-			ready: true,
-			path: null,
-			pageTitle: '',
-			locale: null,
-			routeParams: {}
-		};
-	},
+  getInitialState: function(){
+    return {
+      ready: true,
+      path: null,
+      pageTitle: '',
+      locale: null,
+      routeParams: {}
+    };
+  },
 	
-	componentWillMount: function(){
-		document.addEventListener('backbutton', this.handleBackButton, false);
-		document.addEventListener('offline', this.onOffline, false);
-		document.addEventListener('online', this.onOnline, false);
-		document.addEventListener("resume", this.onResume, false);
-	},
+  componentWillMount: function(){
+    document.addEventListener('backbutton', this.handleBackButton, false);
+    document.addEventListener('offline', this.onOffline, false);
+    document.addEventListener('online', this.onOnline, false);
+    document.addEventListener("resume", this.onResume, false);
+  },
 	
-	componentDidMount: function(){
-		FastClick(document.body);
-		this.router.start(this, this.routes);
+  componentDidMount: function(){
+    FastClick(document.body);
+    this.router.start(this, this.routes);
+  },
 
-	},
-
-	handleBackButton: function(){
-		switch( this.state.path ){
-			case '':
-			this.confirm('Exit app?', this.exit)
-			break;
-			case 'login':
-			case 'signup':
-			case 'settings':
-			this.router.navigate('/');
-			break;
-			default:
-			this.router.back();
-			break;
-		}
-	},
+  handleBackButton: function(){
+    switch( this.state.path ){
+      case '':
+        this.confirm('Exit app?', this.exit)
+        break;
+      case 'login':
+      case 'signup':
+      case 'settings':
+        this.router.navigate('/');
+        break;
+      default:
+        this.router.back();
+        break;
+    }
+  },
 	
-	onOffline: function(){
-		this.setState({
-			offline: true
-		})
-	},
+  onOffline: function(){
+    this.setState({
+      offline: true
+    });
+  },
 	
-	onOnline: function(){
-		this.setState({
-			offline: false
-		})
-	},
+  onOnline: function(){
+    this.setState({
+      offline: false
+    });
+  },
 
-	onResume: function(){
+  onResume: function(){
 		
-	},
+  },
 	
-	exit: function(){
-		navigator.app.exitApp();
-	},
+  exit: function(){
+    navigator.app.exitApp();
+  },
 	
-	setPage: function(pageClass, routeParams, path){
+  setPage: function(pageClass, routeParams, path){
 		this.setState({
 			page: pageClass,
 			routeParams: routeParams,
