@@ -58,8 +58,9 @@ gulp.task('build-app', function(cb){
 		'fonts', 
 		'concat-css', 
 		'copy-index',
+		'copy-resources',
 		'copy-config-xml',
-		'notify-me',
+		
 		cb);
 });
 
@@ -128,9 +129,15 @@ gulp.task('copy-index', function(){
 	return gulp.src('./react/index.html')
 	.pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/'))
 });
+
 gulp.task('copy-config-xml', function(){
 	return gulp.src('./react/config.xml')
 	.pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/'))
+});
+
+gulp.task('copy-resources', function(){
+	return gulp.src('./assets-src/res/**/*.png')
+	.pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/res/'))
 });
 
 gulp.task('notify-me', function(){

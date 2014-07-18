@@ -9,30 +9,24 @@ var PushNotifications = require('./mixins/pushNotifications');
 var Offline = require('./pages/offline');
 var translator = require('./i18n').translator;
 
-var DummyUser = {
-	data: {
-		id: 1,
-		username: 'Max Mustermann',
-	},
-	getData: function(){
-		return this.data;
-	},
-	getSid: function(){
-		return 'SESSION ID 1';
-	},
-	isAuth: function(){
-		return true;
-	},
-	clearSession: function(){
+var Fluxxor = require('fluxxor');
+window.React = React;
 
-	}
-};
+var stores = require('./stores');
+var actions = require('./actions/user');
+
+var flux = new Fluxxor.Flux(stores, actions);
+window.flux = flux;
+
+
+var FluxMixin = Fluxxor.FluxMixin(React),
+    FluxChildMixin = Fluxxor.FluxChildMixin(React),
+    StoreWatchMixin = Fluxxor.StoreWatchMixin;
+
 
 var App = React.createClass({
 
-	mixins: [Dialogs, PushNotifications],
-	
-	user: DummyUser,
+	mixins: [Dialogs, PushNotifications, FluxMixin, StoreWatchMixin("UserStore")],
 	
 	router: require('./util/router'),
 	
@@ -46,6 +40,14 @@ var App = React.createClass({
 			locale: null,
 			routeParams: {}
 		};
+	},
+	getStateFromFlux: function() {
+		var flux = this.getFlux();
+		var store = flux.store('UserStore');
+		return {
+			user: store,
+			isAuth: store.isAuth()
+		}
 	},
 	
 	componentWillMount: function(){
@@ -155,15 +157,15 @@ var App = React.createClass({
 		var routeParams = this.state.routeParams || {};
 		var page = new this.state.page({
 			routeParams: routeParams,
-			user: this.user,
+			user: this.state.user,
 			setPageTitle: this.setPageTitle
 		});
-		if( !this.user.isAuth() ){
+		if( !this.state.isAuth ){
 			return (<LayoutPublic page={page} />);
 		}
 		var showBackButton = (this.state.path != '');
 		return (<LayoutUser page={page} 
-			user={this.user} 
+			user={this.state.user} 
 			pageTitle={this.state.pageTitle}
 			locale={translator.getLocale()}
 			showBackButton={showBackButton}
@@ -171,8 +173,7 @@ var App = React.createClass({
 	},
 	renderWhenOffline: function(){
 		var offlinePage = new Offline({
-			routeParams: {},
-			user: this.user
+			user: this.state.user
 		});
 		return (<div>{offlinePage}</div>);
 	}
@@ -180,7 +181,9 @@ var App = React.createClass({
 
 
 function startApp(){
-	React.renderComponent(new App(), document.body);	
+	React.renderComponent(new App({
+		flux: flux
+	}), document.body);	
 }
 
 window.onload= function(){
