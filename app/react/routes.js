@@ -1,4 +1,5 @@
 module.exports = {
+  
 	'': require('./pages/home'),
 	'signup': require('./pages/signup'),
 	'login': require('./pages/login'),
