@@ -31,11 +31,11 @@ var DummyUser = {
 var App = React.createClass({
 
   mixins: [Dialogs, PushNotifications],
-	
+  
   user: DummyUser,
-	
+  
   router: require('./util/router'),
-	
+  
   routes: require('./routes'),
 
   getInitialState: function(){
@@ -47,14 +47,14 @@ var App = React.createClass({
       routeParams: {}
     };
   },
-	
+  
   componentWillMount: function(){
     document.addEventListener('backbutton', this.handleBackButton, false);
     document.addEventListener('offline', this.onOffline, false);
     document.addEventListener('online', this.onOnline, false);
     document.addEventListener("resume", this.onResume, false);
   },
-	
+  
   componentDidMount: function(){
     FastClick(document.body);
     this.router.start(this, this.routes);
@@ -75,13 +75,13 @@ var App = React.createClass({
         break;
     }
   },
-	
+  
   onOffline: function(){
     this.setState({
       offline: true
     });
   },
-	
+  
   onOnline: function(){
     this.setState({
       offline: false
@@ -89,106 +89,106 @@ var App = React.createClass({
   },
 
   onResume: function(){
-		
+    
   },
-	
+  
   exit: function(){
     navigator.app.exitApp();
   },
-	
+  
   setPage: function(pageClass, routeParams, path){
-		this.setState({
-			page: pageClass,
-			routeParams: routeParams,
-			path: path,
-			pageTitle: ''
-		});
-	},
+    this.setState({
+      page: pageClass,
+      routeParams: routeParams,
+      path: path,
+      pageTitle: ''
+    });
+  },
 
-	setPageTitle: function(title){
-		this.setState({
-			pageTitle: title
-		});
-	},
-	
-	isBrowser: function() {
-		var url = document.URL;
-		return !(url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
-	},
+  setPageTitle: function(title){
+    this.setState({
+      pageTitle: title
+    });
+  },
+  
+  isBrowser: function() {
+    var url = document.URL;
+    return !(url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
+  },
 
-	isAndroid: function() {
-		return (device.platform.toLowerCase() == "android");
-	},
+  isAndroid: function() {
+    return (device.platform.toLowerCase() == "android");
+  },
 
-	isIOS: function() {
-		return (device.platform.toLowerCase() == "ios")
-	},
+  isIOS: function() {
+    return (device.platform.toLowerCase() == "ios")
+  },
 
-	isIOS7: function(){
-		return this.app.getIOSVersion() >= 7;
-	},
+  isIOS7: function(){
+    return this.app.getIOSVersion() >= 7;
+  },
 
-	getIOSVersion: function() {
-		if (!this.isIOS()) {
-			return null;
-		}
-		if (!this.iosVersion) {
-			var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
-			this.iosVersion = [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
-			this.iosVersion = parseInt(this.iosVersion[0]);
-		}
-		return this.iosVersion;
-	},
-	
-	getDeviceUuid: function() {
-		return window.device.uuid;
-	},
-	
-	render: function(){
-		if( !this.state.ready || !this.state.page ){
-			return <div>loadin...</div>;
-		}
-		if( this.state.offline ){
-			return this.renderWhenOffline();
-		}
-		var routeParams = this.state.routeParams || {};
-		var page = new this.state.page({
-			routeParams: routeParams,
-			user: this.user,
-			setPageTitle: this.setPageTitle
-		});
-		if( !this.user.isAuth() ){
-			return (<LayoutPublic page={page} />);
-		}
-		var showBackButton = (this.state.path != '');
-		return (<LayoutUser page={page} 
-			user={this.user} 
-			pageTitle={this.state.pageTitle}
-			locale={translator.getLocale()}
-			showBackButton={showBackButton}
-			back={this.handleBackButton}  />);
-	},
-	renderWhenOffline: function(){
-		var offlinePage = new Offline({
-			routeParams: {},
-			user: this.user
-		});
-		return (<div>{offlinePage}</div>);
-	}
+  getIOSVersion: function() {
+    if (!this.isIOS()) {
+      return null;
+    }
+    if (!this.iosVersion) {
+      var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+      this.iosVersion = [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+      this.iosVersion = parseInt(this.iosVersion[0]);
+    }
+    return this.iosVersion;
+  },
+  
+  getDeviceUuid: function() {
+    return window.device.uuid;
+  },
+  
+  render: function(){
+    if( !this.state.ready || !this.state.page ){
+      return <div>loadin...</div>;
+    }
+    if( this.state.offline ){
+      return this.renderWhenOffline();
+    }
+    var routeParams = this.state.routeParams || {};
+    var page = new this.state.page({
+      routeParams: routeParams,
+      user: this.user,
+      setPageTitle: this.setPageTitle
+    });
+    if( !this.user.isAuth() ){
+      return (<LayoutPublic page={page} />);
+    }
+    var showBackButton = (this.state.path != '');
+    return (<LayoutUser page={page} 
+      user={this.user} 
+      pageTitle={this.state.pageTitle}
+      locale={translator.getLocale()}
+      showBackButton={showBackButton}
+      back={this.handleBackButton}  />);
+  },
+  renderWhenOffline: function(){
+    var offlinePage = new Offline({
+      routeParams: {},
+      user: this.user
+    });
+    return (<div>{offlinePage}</div>);
+  }
 });
 
 
 function startApp(){
-	React.renderComponent(new App(), document.body);	
+  React.renderComponent(new App(), document.body);  
 }
 
 window.onload= function(){
-	var url = document.URL;
-	var isSmart = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
-	if( isSmart ){
-		document.addEventListener('deviceready', startApp, false);
-	}
-	else{
-		startApp();
-	}
+  var url = document.URL;
+  var isSmart = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
+  if( isSmart ){
+    document.addEventListener('deviceready', startApp, false);
+  }
+  else{
+    startApp();
+  }
 }
