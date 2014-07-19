@@ -1,14 +1,15 @@
 /** @jsx React.DOM */
 var React = require('react');
 var IScroll = require('../../components/iscroll');
-var __ = require('../../i18n')._;
-var Navigation = require('./components/nav');
+var Navigation = require('./nav');
 var Ipsum = require('../../components/ipsum');
-
+var __ = require('../../flux/stores/i18n')._
 
 module.exports = React.createClass({
+  
   componentDidMount: function(){
-    this.props.setPageTitle(__('app.name'))
+    this.props.setPageTitle(__('app.name'));
+
   },
   render: function(){
     return (
@@ -18,7 +19,7 @@ module.exports = React.createClass({
       );
   },
   realRender: function(){ 
-    if( !this.props.user.isAuth() ){
+    if( !this.props.isAuth ){
       return this.renderGuest();
     }
     return (
@@ -29,18 +30,18 @@ module.exports = React.createClass({
       </IScroll>
       </div>
       );
-},
-renderGuest: function(){
-  return(
-    <IScroll>
-    <div className="text-center">
-    <h3>{__('welcome')}</h3>
-    <a href="/#login" className="btn btn-success btn-lg" style={{width: '80%', margin: 30}}>{__('login')}</a>
-    <br />
-    <a href="/#signup" className="btn btn-primary btn-lg" style={{width: '80%', margin: 30}}>{__('signup')}</a>
-    </div>
-    </IScroll>
-    );
-}
+  },
+  renderGuest: function(){
+    return(
+      <IScroll>
+      <div className="text-center">
+      <h3>{__('welcome')}</h3>
+      <a href="/#login" className="btn btn-success btn-lg" style={{width: '80%', margin: 30}}>{__('login')}</a>
+      <br />
+      <a href="/#signup" className="btn btn-primary btn-lg" style={{width: '80%', margin: 30}}>{__('signup')}</a>
+      </div>
+      </IScroll>
+      );
+  }
 
 });

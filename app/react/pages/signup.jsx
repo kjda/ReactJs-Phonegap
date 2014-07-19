@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
-var __ = require('../i18n')._;
 var IScroll = require('../components/iscroll');
+var __ = require('../flux/stores/i18n')._
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -39,12 +39,12 @@ module.exports = React.createClass({
       </div>
 
       <div className="form-group text-center">
-      <button ref="submit" type="submit" className="btn btn-primary btn-lg" onClick={this.register}>{__('signup.submot')}</button>
+      <button ref="submit" type="submit" className="btn btn-primary btn-lg" onClick={this.register}>{__('signup.submit')}</button>
       </div>
       
       </form>
-    </div>
-    </IScroll>
-    );
+      </div>
+      </IScroll>
+      );
 }
 });

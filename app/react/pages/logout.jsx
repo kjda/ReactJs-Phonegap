@@ -1,9 +1,11 @@
 var React = require('react');
-var __ = require('../i18n')._;
+var __ = require('../flux/stores/i18n')._
+
+var UserActions = require('../flux/actions/user');
+
 module.exports = React.createClass({
 	componentDidMount: function(){
-		this.props.user.clearSession();
-		window.location.href= '/#';
+		UserActions.logout();
 	},
 	render: function(){
 		return <div />;

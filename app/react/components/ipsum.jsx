@@ -29,7 +29,7 @@ module.exports = React.createClass({
     } 
     return(
       <div>{paragraphs}</div>
-    );
+      );
   }
 
 });

@@ -9,22 +9,22 @@ module.exports = React.createClass({
   },
   
   render: function(){
-  
+    
     var elements = [];
     
     _.each(this.props.links, function(item, key){
     	elements.push(
-          <li key={key}><a href={item.url}>{item.label}</a></li>
-	);
+        <li key={key}><a href={item.url}>{item.label}</a></li>
+        );
     });
     
     return(
       <div className="sub-nav">
-        <ul>
-          {elements}
-        </ul>
+      <ul>
+      {elements}
+      </ul>
       </div>
-    );
+      );
     
   }
   

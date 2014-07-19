@@ -1,13 +1,14 @@
 /** @jsx React.DOM */
 var React = require('react');
-var __ = require('../../i18n')._;
 var IScroll = require('../../components/iscroll');
 var Navigation = require('./nav');
+var __ = require('../../flux/stores/i18n')._
+
 
 module.exports = React.createClass({
   getInitialState: function(){
     return {
-      data: this.props.user.getData()
+      data: this.props.user
     }
   },
   componentDidMount: function(){

@@ -1,3 +1,5 @@
+///var/www/ReactCordovaApp/app/phonegap-app/platforms/android$ keytool -genkey -v -keystore release.keystore1 -alias key1 -keyalg RSA -keysize 2048 -validity 20000 --storepass ttbeeq80 --keypass ttbeeq80
+
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var react = require('gulp-react');
@@ -9,37 +11,79 @@ var minifyCSS = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
 var runSequence = require('gulp-run-sequence');
-var growl = require('gulp-notify-growl');
 var jsValidate = require('gulp-jsvalidate');
 var clean = require('gulp-clean');
 var shell = require('gulp-shell');
+var replace = require('gulp-replace');
 
-var notify = growl({
-  hostname : 'localhost' // IP or Hostname to notify, default to localhost
-});
+var path = require('path');
 
-var PHONEGAP_APP_DIR = 'phonegap-app';
-var PHONEGAP_DEVELOPER_APP_PORT = 3131;
+var configs = require('./build.configs.js');
 
-var phonegapPlugins = [
-	'https://github.com/phonegap-build/PushPlugin.git',
-	'org.apache.cordova.statusbar',
-	'https://github.com/mobimentum/phonegap-plugin-loading-spinner.git',
-	'org.apache.cordova.vibration',
-	'org.apache.cordova.splashscreen',
-	'org.apache.cordova.network-information',
-	'org.apache.cordova.globalization',
-	'org.apache.cordova.geolocation',
-	'org.apache.cordova.inappbrowser',
-	'org.apache.cordova.dialogs',
-	'org.apache.cordova.device'
-];
+var PHONEGAP_APP_DIR = configs.targetDirectory;
+var PHONEGAP_DEVELOPER_APP_PORT = configs.phonegapServePort;
+
+
 var phonegapPluginCommands = [];
-for(var i = 0; i < phonegapPlugins.length; i++){
-  phonegapPluginCommands.push('phonegap plugin add ' + phonegapPlugins[i]);
+for(var i = 0; i < configs.app.phonegapPlugins.length; i++){
+	var p = configs.app.phonegapPlugins[i];
+  	phonegapPluginCommands.push('phonegap plugin add ' + p.installFrom);
 }
 
-
+function getPluginsXML(){
+	var xml = '';
+	for(var i = 0; i < configs.app.phonegapPlugins.length; i++){
+		var p = configs.app.phonegapPlugins[i];
+		var pluginXml = '<gap:plugin name="' + p.name + '"';
+		if( !!p.version ){
+			pluginXml += ' version="' + p.version + '"';
+		}
+		pluginXml += '/>' + "\n";
+		xml += pluginXml;		
+	}
+	return xml;
+}
+function getIconsXML(){
+	var xml = '';
+	for(var i = 0; i < configs.app.icons.length; i++){
+		var e = configs.app.icons[i];
+		var eXml = '<icon src="' + e.src + '"';
+		if( !!e.platform ){
+			eXml += ' platform="' + e.platform + '"';
+		}
+		if( !!e.width ){
+			eXml += ' width="' + e.width + '"';
+		}
+		if( !!e.height ){
+			eXml += ' height="' + e.height + '"';
+		}
+		if( !!e.density ){
+			eXml += ' density="' + e.density + '"';
+		}
+		eXml += '/>' + "\n";
+		xml += eXml;
+	}
+	return xml;
+}
+function getSplashscreenXML(){
+	var xml = '';
+	for(var i = 0; i < configs.app.splashscreens.length; i++){
+		var e = configs.app.splashscreens[i];
+		var eXml = '<gap:splash src="' + e.src + '"';
+		if( !!e.platform ){
+			eXml += ' gap:platform="' + e.platform + '"';
+		}
+		if( !!e.width ){
+			eXml += ' width="' + e.width + '"';
+		}
+		if( !!e.height ){
+			eXml += ' height="' + e.height + '"';
+		}
+		eXml += '/>' + "\n";
+		xml += eXml;
+	}
+	return xml;
+}
 gulp.task('default', function(){
 	gulp.watch([
 		'./react/**/*.jsx',
@@ -60,7 +104,6 @@ gulp.task('build-app', function(cb){
 		'copy-index',
 		'copy-resources',
 		'copy-config-xml',
-		
 		cb);
 });
 
@@ -132,6 +175,21 @@ gulp.task('copy-index', function(){
 
 gulp.task('copy-config-xml', function(){
 	return gulp.src('./react/config.xml')
+	.pipe(replace(/{NAMESPACE}/g, configs.app.namespace))
+	.pipe(replace(/{VERSION}/g, configs.app.version))
+	.pipe(replace(/{APP_NAME}/g, configs.app.name))
+	.pipe(replace(/{APP_DESCRIPTION}/g, configs.app.description))
+	.pipe(replace(/{AUTHOR_WEBISTE}/g, configs.app.author.website))
+	.pipe(replace(/{AUTHOR_EMAIL}/g, configs.app.author.email))
+	.pipe(replace(/{AUTHOR_NAME}/g, configs.app.author.name))
+	.pipe(replace(/{PLUGINS}/g, getPluginsXML()))
+	.pipe(replace(/{ICONS}/g, getIconsXML()))
+	.pipe(replace(/{SPLASHSCREENS}/g, getSplashscreenXML()))
+	.pipe(replace(/{ACCESS_ORIGIN}/g, configs.app.accessOrigin))
+	.pipe(replace(/{ORIENTATION}/g, configs.app.orientation))
+	.pipe(replace(/{TARGET_DEVICE}/g, configs.app.targetDevice))
+	.pipe(replace(/{EXIT_ON_SUSPEND}/g, configs.app.exitOnSuspend))
+	
 	.pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/'))
 });
 
@@ -155,8 +213,13 @@ gulp.task('fonts', function(){
 });
 
 gulp.task('create', function(cb){
-	runSequence('create-app', 'install-plugins', cb);
+	runSequence('clean-app', 'create-app', 'install-plugins', cb);
 });
+
+gulp.task('clean-app', function(){
+	return gulp.src('./' + PHONEGAP_APP_DIR, {read: false})
+        .pipe(clean());
+})
 
 gulp.task('create-app', shell.task([
   'phonegap create ' + PHONEGAP_APP_DIR

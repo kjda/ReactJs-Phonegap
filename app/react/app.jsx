@@ -7,26 +7,16 @@ var LayoutPublic = require('./components/layoutPublic');
 var Dialogs = require('./mixins/dialogs');
 var PushNotifications = require('./mixins/pushNotifications');
 var Offline = require('./pages/offline');
-var translator = require('./i18n').translator;
+var I18nStore = require('./flux/stores/i18n');
 
-var Fluxxor = require('fluxxor');
-window.React = React;
+var Fluxy = require('fluxy');
 
-var stores = require('./stores');
-var actions = require('./actions/user');
-
-var flux = new Fluxxor.Flux(stores, actions);
-window.flux = flux;
-
-
-var FluxMixin = Fluxxor.FluxMixin(React),
-    FluxChildMixin = Fluxxor.FluxChildMixin(React),
-    StoreWatchMixin = Fluxxor.StoreWatchMixin;
+var UserStore = require('./flux/stores/user');
 
 
 var App = React.createClass({
 
-	mixins: [Dialogs, PushNotifications, FluxMixin, StoreWatchMixin("UserStore")],
+	mixins: [Dialogs, PushNotifications],
 	
 	router: require('./util/router'),
 	
@@ -38,31 +28,35 @@ var App = React.createClass({
 			path: null,
 			pageTitle: '',
 			locale: null,
-			routeParams: {}
+			routeParams: {},
+			user: UserStore.get('user'),
+			isAuth: UserStore.isAuth()
 		};
-	},
-	getStateFromFlux: function() {
-		var flux = this.getFlux();
-		var store = flux.store('UserStore');
-		return {
-			user: store,
-			isAuth: store.isAuth()
-		}
 	},
 	
 	componentWillMount: function(){
+		Fluxy.start();
+		UserStore.addWatch(this.onUserChanged);
+		//I18nStore.addWatch(this.onUserChanged);
 		document.addEventListener('backbutton', this.handleBackButton, false);
 		document.addEventListener('offline', this.onOffline, false);
 		document.addEventListener('online', this.onOnline, false);
 		document.addEventListener("resume", this.onResume, false);
 	},
-	
+	componentWillUnmount: function () {
+		UserStore.removeWatch(this.onUserChanged);
+	},
 	componentDidMount: function(){
 		FastClick(document.body);
 		this.router.start(this, this.routes);
 
 	},
-
+	onUserChanged: function(){
+		this.setState({
+			user: UserStore.get('user'),
+			isAuth: UserStore.isAuth()
+		});
+	},
 	handleBackButton: function(){
 		switch( this.state.path ){
 			case '':
@@ -158,16 +152,21 @@ var App = React.createClass({
 		var page = new this.state.page({
 			routeParams: routeParams,
 			user: this.state.user,
+			isAuth: this.state.isAuth,
 			setPageTitle: this.setPageTitle
 		});
 		if( !this.state.isAuth ){
-			return (<LayoutPublic page={page} />);
+			return (
+				<LayoutPublic 
+				page={page} />
+				);
 		}
 		var showBackButton = (this.state.path != '');
 		return (<LayoutUser page={page} 
-			user={this.state.user} 
+			user={this.state.user}
+			isAuth={this.state.isAuth}
 			pageTitle={this.state.pageTitle}
-			locale={translator.getLocale()}
+			locale={I18nStore.getLocale()}
 			showBackButton={showBackButton}
 			back={this.handleBackButton}  />);
 	},
@@ -180,9 +179,9 @@ var App = React.createClass({
 });
 
 
+
 function startApp(){
 	React.renderComponent(new App({
-		flux: flux
 	}), document.body);	
 }
 

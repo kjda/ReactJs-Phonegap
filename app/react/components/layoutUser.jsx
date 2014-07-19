@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-var __ = require('../i18n')._;
+var __ = require('../flux/stores/i18n')._
 
 module.exports = React.createClass({
 
@@ -27,51 +27,51 @@ module.exports = React.createClass({
 
   render: function() {
    return ( 
-      <div>
-        <div className="snap-drawers">
-          <div className="snap-drawer snap-drawer-left">
-            <ul>
-              <li><a href="/#" onClick={this.hideNav}>{__('nav.home')}</a></li>
-              <li><a href="/#settings" onClick={this.hideNav}>{__('nav.settings')}</a></li>
-              <li><a href="/#logout" onClick={this.hideNav}>{__('nav.logout')}</a></li>
-            </ul>
-          </div>
+    <div>
+    <div className="snap-drawers">
+    <div className="snap-drawer snap-drawer-left">
+    <ul>
+    <li><a href="/#" onClick={this.hideNav}>{__('nav.home')}</a></li>
+    <li><a href="/#settings" onClick={this.hideNav}>{__('nav.settings')}</a></li>
+    <li><a href="/#logout" onClick={this.hideNav}>{__('nav.logout')}</a></li>
+    </ul>
+    </div>
 
-          <div className="snap-drawer snap-drawer-right">
-          </div>
-        </div>
+    <div className="snap-drawer snap-drawer-right">
+    </div>
+    </div>
 
-        <div ref="content"  className="snap-content" >
+    <div ref="content"  className="snap-content" >
 
-          <div ref="pageHeader" className="navbar navbar-default" role="navigation">
-            <div className="container-fluid">
-              <div className="navbar-header">
-                {this.renderBackButton()}
-                <button className="btn btn-default no-outline home-button" onClick={this.toggleNav} >
-                  <i className="glyphicon glyphicon-align-justify" />
-                </button>
+    <div ref="pageHeader" className="navbar navbar-default" role="navigation">
+    <div className="container-fluid">
+    <div className="navbar-header">
+    {this.renderBackButton()}
+    <button className="btn btn-default no-outline home-button" onClick={this.toggleNav} >
+    <i className="glyphicon glyphicon-align-justify" />
+    </button>
 
-                <div className="page-title">
-                  {this.props.pageTitle}
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="page-title">
+    {this.props.pageTitle}
+    </div>
+    </div>
+    </div>
+    </div>
 
-          <div ref="pageContent" className="page-content">
-            {this.props.page}
-          </div>
+    <div ref="pageContent" className="page-content">
+    {this.props.page}
+    </div>
 
-        </div>
-      </div>
-     );
-  },
-  renderBackButton: function(){
-    if( !this.props.showBackButton ){
-      return;
-    }
-    return (
-      <i className="pull-right ion-ios7-undo back-button" onClick={this.props.back} />
+    </div>
+    </div>
     );
+},
+renderBackButton: function(){
+  if( !this.props.showBackButton ){
+    return;
   }
+  return (
+    <i className="pull-right ion-ios7-undo back-button" onClick={this.props.back} />
+    );
+}
 });
