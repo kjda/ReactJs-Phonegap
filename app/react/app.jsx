@@ -34,14 +34,14 @@ module.exports = React.createClass({
 	},
 	
 	componentWillMount: function(){
-		UserStore.addChangeListener(this.onUserChanged);
+		UserStore.onChange(this.onUserChanged);
 		document.addEventListener('backbutton', this.handleBackButton, false);
 		document.addEventListener('offline', this.onOffline, false);
 		document.addEventListener('online', this.onOnline, false);
 		document.addEventListener("resume", this.onResume, false);
 	},
 	componentWillUnmount: function () {
-		UserStore.removeChangeListener(this.onUserChanged);
+		UserStore.offChange(this.onUserChanged);
 	},
 	componentDidMount: function(){
 		FastClick(document.body);

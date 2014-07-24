@@ -21,11 +21,11 @@ module.exports = React.createClass({
   },
   
   componentWillMount: function(){
-    UserStore.addChangeListener(this.onUserChange);
+    UserStore.onChange(this.onUserChange);
   },
 
   componentWillUnmount: function(){
-    UserStore.removeChangeListener(this.onUserChange);
+    UserStore.offChange(this.onUserChange);
   },
 
   onUserChange: function(){

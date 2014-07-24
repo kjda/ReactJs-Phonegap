@@ -7,7 +7,7 @@ var UserStore = require('../flux/stores/user');
 module.exports = React.createClass({
 	
 	componentWillMount: function(){
-		UserStore.addChangeListener(this.onUserChange);
+		UserStore.onChange(this.onUserChange);
 	},
 
 	componentDidMount: function(){
@@ -15,7 +15,7 @@ module.exports = React.createClass({
 	},
 	
 	componentWillUnmount: function(){
-		UserStore.removeChangeListener(this.onUserChange);
+		UserStore.offChange(this.onUserChange);
 	},
 	
 	onUserChange: function(){

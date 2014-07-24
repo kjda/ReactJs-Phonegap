@@ -7,7 +7,7 @@ var I18nActions = require('../../flux/actions/i18n')
 var __ = I18nStore._;
 
 module.exports = React.createClass({
-  
+
   getInitialState: function(){
     return {
       languages: I18nStore.getLanguages(),
@@ -16,11 +16,11 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function(){
-    I18nStore.addChangeListener(this.onI18nChange);
+    I18nStore.onChange(this.onI18nChange);
   },
 
   componentWillUnmount: function(){
-    I18nStore.removeChangeListener(this.onI18nChange);
+    I18nStore.offChange(this.onI18nChange);
   },
 
   onI18nChange: function(){

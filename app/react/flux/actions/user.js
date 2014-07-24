@@ -17,6 +17,7 @@ module.exports = ReactFlux.createActions({
 	}],
 
 	edit: [userConstants.USER_EDIT_DATA, function(username){
+		console.log("UserActions.edit");
 		return {
 			username: username
 		}

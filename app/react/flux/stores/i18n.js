@@ -1,82 +1,63 @@
+var storage = require('../../util/storage');
 var constants = require('../constants/i18n');
 var ReactFlux = require('react-flux');
-var i18n = require('./i18n/index')
+var i18n = require('./i18n/index');
 
-function Translator(){
-  this.languages = i18n.languages; 
-  this.translations = i18n.translations;
-  this.setLocale();
-}
+var Store = ReactFlux.createStore({
 
-Translator.prototype = {
-
-  setLocale: function(_locale){
-    if( !_locale || typeof this.translations[_locale] == 'undefined' ){
-      _locale = window.localStorage.getItem('locale') || 'en';
-    }
-    this.locale = _locale;
-    window.localStorage.setItem('locale', _locale);
+  getInitialState: function(){
+    return {
+      locale: null
+    };
   },
-  
+
+  storeDidMount: function(){
+    this.setLocale( storage.getItem('locale') );
+  },
+
+  setLocale: function(locale){
+    if( !locale || typeof i18n.translations[locale] == 'undefined' ){
+      locale =  i18n.defaultLocale;
+    }
+    this.setState({
+      locale: locale
+    });
+    storage.setItem('locale', locale);
+  },
+
   getLocale: function(){
-    return this.locale;
+    return this.getState().locale;
   },
 
   getLanguages: function(){
-    return this.languages
+    return i18n.languages;
   },
-  
-  translate: function(key, params){
+
+  /**
+  * Translate function
+  */
+  _: function(key, params){
     key = key.toLowerCase();
-    
     params = params || {};
-    if( !!!this.translations[this.locale][key] ){
+    var locale = this.getState().locale;
+    var t = i18n.translations[locale][key];
+    if( typeof t == 'undefined' ){
       return '?:' + key;
     }
-    var t = this.translations[this.locale][key];
+    
     for(var i in params){
       t = t.replace('{' + i + '}', params[i]);
     }
     return '_:' + t;
-  },
-
-  log: function(token){
-    return;
-    $.ajax({
-      url: '/api/lang/jstoken',
-      type: 'POST',
-      data: {token: token}
-    }).done(function(){});
-  },
-
-  hasLocale: function(locale){
-
   }
-};
-
-var translator = new Translator();
-
-
-I18Store = ReactFlux.createStore({
-  
-  getLocale: function(){
-    return translator.getLocale();
-  },
-
-  getLanguages: function(){
-    return translator.getLanguages();
-  },
-  
-  _: function(key, params){
-    return translator.translate(key, params)
-  },
 }, [
- 
+
   [constants.I18N_SET_LOCALE_SUCCESS, function (payload) {
-    translator.setLocale(payload.locale);
-    this.setState({})
+    this.setState({
+      locale: payload.locale
+    });
   }]
- 
+
 ]);
 
-module.exports = I18Store;
+module.exports = Store;
