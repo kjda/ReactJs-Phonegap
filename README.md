@@ -1,7 +1,7 @@
 ReactJs-Phonegap
 ================
 
-A boilerplate ReactJS-Phonegap App
+A boilerplate ReactJS-Phonegap App (+With Flux data flow)
 
 ![screenshot](https://raw.githubusercontent.com/kjda/ReactJs-Phonegap/master/screenshot0.jpg)
 
@@ -21,9 +21,9 @@ $ git clone https://github.com/kjda/ReactJs-Phonegap.git
 * Set it up
 ```
 $ cd ReactJs-Phonegap/app
- npm run setup
- gulp create
- gulp build-app
+$  npm run setup
+$  gulp create
+$  gulp build-app
 ```
 
 * Run it
