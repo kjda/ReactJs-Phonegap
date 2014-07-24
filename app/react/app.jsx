@@ -9,12 +9,11 @@ var PushNotifications = require('./mixins/pushNotifications');
 var Offline = require('./pages/offline');
 var I18nStore = require('./flux/stores/i18n');
 
-var Fluxy = require('fluxy');
-
+var ReactFlux = require('react-flux');
 var UserStore = require('./flux/stores/user');
 
 
-var App = React.createClass({
+module.exports = React.createClass({
 
 	mixins: [Dialogs, PushNotifications],
 	
@@ -29,22 +28,20 @@ var App = React.createClass({
 			pageTitle: '',
 			locale: null,
 			routeParams: {},
-			user: UserStore.get('user'),
+			user: UserStore.getData(),
 			isAuth: UserStore.isAuth()
 		};
 	},
 	
 	componentWillMount: function(){
-		Fluxy.start();
-		UserStore.addWatch(this.onUserChanged);
-		//I18nStore.addWatch(this.onUserChanged);
+		UserStore.addChangeListener(this.onUserChanged);
 		document.addEventListener('backbutton', this.handleBackButton, false);
 		document.addEventListener('offline', this.onOffline, false);
 		document.addEventListener('online', this.onOnline, false);
 		document.addEventListener("resume", this.onResume, false);
 	},
 	componentWillUnmount: function () {
-		UserStore.removeWatch(this.onUserChanged);
+		UserStore.removeChangeListener(this.onUserChanged);
 	},
 	componentDidMount: function(){
 		FastClick(document.body);
@@ -53,9 +50,10 @@ var App = React.createClass({
 	},
 	onUserChanged: function(){
 		this.setState({
-			user: UserStore.get('user'),
+			user: UserStore.getData(),
 			isAuth: UserStore.isAuth()
 		});
+		this.forceUpdate();
 	},
 	handleBackButton: function(){
 		switch( this.state.path ){
@@ -155,6 +153,7 @@ var App = React.createClass({
 			isAuth: this.state.isAuth,
 			setPageTitle: this.setPageTitle
 		});
+
 		if( !this.state.isAuth ){
 			return (
 				<LayoutPublic 
@@ -177,21 +176,3 @@ var App = React.createClass({
 		return (<div>{offlinePage}</div>);
 	}
 });
-
-
-
-function startApp(){
-	React.renderComponent(new App({
-	}), document.body);	
-}
-
-window.onload= function(){
-	var url = document.URL;
-	var isSmart = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
-	if( isSmart ){
-		document.addEventListener('deviceready', startApp, false);
-	}
-	else{
-		startApp();
-	}
-}

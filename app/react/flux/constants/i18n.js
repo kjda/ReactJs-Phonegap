@@ -1,9 +1,5 @@
-var Fluxy = require('fluxy');
+var ReactFlux = require('react-flux');
 
-module.exports = Fluxy.createConstants({
-	serviceMessages: [
+module.exports = ReactFlux.createConstants([
 	'SET_LOCALE'
-	],
-	messages: [],
-	values: {}
-});
+], 'I18N');

@@ -1,10 +1,7 @@
-var Fluxy = require('fluxy');
+var ReactFlux = require('react-flux');
 
-module.exports = Fluxy.createConstants({
-	serviceMessages: [
+module.exports = ReactFlux.createConstants([
 	'LOGIN',
-	'LOGOUT'
-	],
-	messages: [],
-	values: {}
-});
+	'LOGOUT',
+	'EDIT_DATA'
+], 'USER');

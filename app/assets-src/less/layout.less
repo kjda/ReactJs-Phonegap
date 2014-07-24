@@ -1,3 +1,30 @@
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+	
+}
+
+html{
+	background-color:#eaeaea;
+	-webkit-backface-visibility: hidden;
+}
+body {
+	-webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+	-webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+	-webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+	-webkit-backface-visibility: hidden;
+	
+	
+	background-attachment:fixed;
+	font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	font-size:14px;
+	
+	margin:0px;
+	padding:0px;
+	height:100%;
+	width:100%;
+	background: #fff;
+}
+
 .snap-content {
 	height: 100%;
 	position: absolute;
@@ -15,11 +42,9 @@
 	outline-offset: 0px !important;
 }
 
-.navbar{
-	margin-bottom: 0 !important;
-}
 
 .navbar{
+	margin-bottom: 0 !important;
 	.page-title{
 		display: inline-block;
 		padding-top: 10px;
@@ -29,21 +54,29 @@
 		width: 100%;
 		text-align: center;	
 	}
+	.page-title-public{
+		float: left;
+		padding-top: 10px;
+		padding-left: 10px;
+		font-size: 18px;
+		font-weight: bold;
+		color: #898989;
+	}
 	.home-button{
-		margin:5px;
 		position: absolute;
-		top: 0; 
-		left: 0;
+		top: 8px; 
+		left: 8px;
 	}
 	.back-button {
 		font-size: 40px;
 		position: absolute;
 		right: 15px; 
-		top: 5px
+		top: 5px;
+		color: #fff;
 	}
 }
 
-	
+
 
 .page-content {
 	position: relative;

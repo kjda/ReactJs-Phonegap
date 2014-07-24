@@ -16,11 +16,11 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function(){
-    I18nStore.addWatch(this.onI18nChange);
+    I18nStore.addChangeListener(this.onI18nChange);
   },
 
   componentWillUnmount: function(){
-    I18nStore.removeWatch(this.onI18nChange);
+    I18nStore.removeChangeListener(this.onI18nChange);
   },
 
   onI18nChange: function(){
@@ -45,7 +45,7 @@ module.exports = React.createClass({
   },
   
   selectLang: function(code){
-    I18nActions.setLanguage(code);
+    I18nActions.setLocale(code);
     return false;
   },
 

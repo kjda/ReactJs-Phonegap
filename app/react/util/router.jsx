@@ -5,8 +5,6 @@
  var Backbone = require('backbone');
  Backbone.$ = require('jquery');
 
-
-
  module.exports = {
  	
  	router: null,
@@ -56,4 +54,5 @@
  		window.history.back();
  		return false;
  	}
+
  }

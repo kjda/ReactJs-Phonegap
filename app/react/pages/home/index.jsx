@@ -6,7 +6,7 @@ var Ipsum = require('../../components/ipsum');
 var __ = require('../../flux/stores/i18n')._
 
 module.exports = React.createClass({
-  
+
   componentDidMount: function(){
     this.props.setPageTitle(__('app.name'));
 
@@ -36,9 +36,9 @@ module.exports = React.createClass({
       <IScroll>
       <div className="text-center">
       <h3>{__('welcome')}</h3>
-      <a href="/#login" className="btn btn-success btn-lg" style={{width: '80%', margin: 30}}>{__('login')}</a>
+      <button href="/#login" className="topcoat-button--cta">{__('login')}</button>
       <br />
-      <a href="/#signup" className="btn btn-primary btn-lg" style={{width: '80%', margin: 30}}>{__('signup')}</a>
+      <a href="/#signup" className="topcoat-button">{__('signup')}</a>
       </div>
       </IScroll>
       );

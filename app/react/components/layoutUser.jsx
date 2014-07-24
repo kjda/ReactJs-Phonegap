@@ -43,7 +43,7 @@ module.exports = React.createClass({
 
     <div ref="content"  className="snap-content" >
 
-    <div ref="pageHeader" className="navbar navbar-default" role="navigation">
+    <div ref="pageHeader" className="navbar navbar-fixed" role="navigation">
     <div className="container-fluid">
     <div className="navbar-header">
     {this.renderBackButton()}

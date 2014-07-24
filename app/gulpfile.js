@@ -123,13 +123,13 @@ gulp.task('compile-jsx', function(){
 	.pipe(gulp.dest('./build/'));
 });
 gulp.task('browserify', function(){ 
-  return gulp.src(['./build/app.js'])
+  return gulp.src(['./build/index.js'])
     .pipe(plumber())
     .pipe(browserify({
       insertGlobals: true,
       debug: true
     }))
-    .pipe(concat('app.js'))
+    .pipe(concat('index.js'))
     .pipe(gulp.dest('./build/'));
 });
 
@@ -162,7 +162,7 @@ gulp.task('bundle-js', function(){
 		'./assets-src/bower/bootstrap/dist/js/bootstrap.min.js',
 		'./assets-src/bower/snapjs/snap.min.js',
 		'./assets-src/bower/iscroll/build/iscroll.js',
-		'./build/app.js'
+		'./build/index.js'
 	])
 	.pipe(concat('bundle.js'))
 	.pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/js/'))

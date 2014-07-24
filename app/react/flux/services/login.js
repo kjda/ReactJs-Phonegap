@@ -1,19 +1,25 @@
-var Promise = require('bluebird');
+var Promise = require('es6-promise').Promise;
+
 //dummy login service
 module.exports = {
-  login: function (username, password) {
-    var token = Promise.defer();
-    setTimeout(function(){
-    	token.resolve({
-    		_id: 1, 
-    		username: username
-      });
-    }, 0)
-    return token.promise;
+
+  login: function (email, password) {
+
+    var promise = new Promise(function(resolve, reject){
+      setTimeout(function(){
+        resolve({
+          _id: 1, 
+          email: email,
+          username: 'Max Mustermann 2'
+        });
+      }, 0)
+    });
+    
+    return promise;
   },
+
   logout: function(){
-  	var t = Promise.defer();
-  	t.resolve();
-  	return t.promise;
+  	return true;
   }
+
 };

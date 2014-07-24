@@ -19,6 +19,7 @@
     "bootstrap": "~3.1.1",
     "ionic": "~0.9.27",
     "bootbox": "~4.2.0",
-    "iscroll-sticky": "~0.1.1"
+    "iscroll-sticky": "~0.1.1",
+    "topcoat": "~0.8.0"
   }
 }

@@ -2,23 +2,38 @@
 var React = require('react');
 var __ = require('../flux/stores/i18n')._
 
+var UserStore = require('../flux/stores/user');
 var UserActions = require('../flux/actions/user');
 
 module.exports = React.createClass({
+  
   getInitialState: function(){
     return {
       erorr: null
     };
   },
-  login: function(){
-    
 
-    UserActions.login('user', 'pass');
+  login: function(){
+    var email = this.refs.email.getDOMNode().value;
+    var password = this.refs.password.getDOMNode().value;
+    UserActions.login(email, password);
     return false;
   },
-  componentDidUpdate: function(){
-
+  
+  componentWillMount: function(){
+    UserStore.addChangeListener(this.onUserChange);
   },
+
+  componentWillUnmount: function(){
+    UserStore.removeChangeListener(this.onUserChange);
+  },
+
+  onUserChange: function(){
+    if( UserStore.isAuth() ){
+      window.location.href = '#';
+    }
+  },
+  
   render: function() {
     var error = null;
     if( this.state.error ){

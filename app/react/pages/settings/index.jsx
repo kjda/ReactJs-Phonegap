@@ -3,14 +3,16 @@
 var React = require('react');
 var IScroll = require('../../components/iscroll');
 var Navigation = require('./nav');
-var UserStore = require('../../flux/stores/user');
+
 var __ = require('../../flux/stores/i18n')._
+var UserStore = require('../../flux/stores/user');
+var UserActions = require('../../flux/actions/user');
 
 module.exports = React.createClass({
   
   getInitialState: function(){
     return {
-      data: this.props.user
+      data: UserStore.getState().data
     }
   },
 
@@ -28,7 +30,8 @@ module.exports = React.createClass({
   },
 
   save: function(){
-    alert('Saving...')
+    var username = this.refs.username.getDOMNode().value;
+    UserActions.edit(username);
     return false;
   },
 

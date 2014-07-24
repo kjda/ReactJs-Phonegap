@@ -1,17 +1,15 @@
 var constants = require('../constants/i18n');
-var Fluxy = require('fluxy');
+var ReactFlux = require('react-flux');
 var i18n = require('./i18n/index')
 
 function Translator(){
-  console.log(i18n);
   this.languages = i18n.languages; 
   this.translations = i18n.translations;
   this.setLocale();
 }
 
-
 Translator.prototype = {
-  
+
   setLocale: function(_locale){
     if( !_locale || typeof this.translations[_locale] == 'undefined' ){
       _locale = window.localStorage.getItem('locale') || 'en';
@@ -33,7 +31,7 @@ Translator.prototype = {
     
     params = params || {};
     if( !!!this.translations[this.locale][key] ){
-      return 't:' + key;
+      return '?:' + key;
     }
     var t = this.translations[this.locale][key];
     for(var i in params){
@@ -59,12 +57,7 @@ Translator.prototype = {
 var translator = new Translator();
 
 
-I18Store = Fluxy.createStore({
-  getInitialState: function(){
-    return {
-      locale: 0
-    }
-  },
+I18Store = ReactFlux.createStore({
   
   getLocale: function(){
     return translator.getLocale();
@@ -77,30 +70,13 @@ I18Store = Fluxy.createStore({
   _: function(key, params){
     return translator.translate(key, params)
   },
-
-  actions: [
-  [constants.SET_LOCALE, function (locale) {
-    translator.setLocale(locale);
-    this.set('locale', locale)
+}, [
+ 
+  [constants.I18N_SET_LOCALE_SUCCESS, function (payload) {
+    translator.setLocale(payload.locale);
+    this.setState({})
   }]
-  ],
-
-  Mixin: function(){
-    return LanguageMixin
-  }
-
-});
-
-var LanguageMixin = {
-  componentWillMount: function(){
-    I18Store.addWatch(this.__onI18StorChange);
-  },
-  componentWillUnmount: function(){
-    I18Store.removeWatch(this.__onI18StorChange);
-  },
-  __onI18StorChange: function(){
-    this.forceUpdate();
-  }
-}
+ 
+]);
 
 module.exports = I18Store;

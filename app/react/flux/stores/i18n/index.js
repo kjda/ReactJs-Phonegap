@@ -6,9 +6,14 @@ module.exports = {
 	{
 		name: 'German',
 		code: 'de'
+	},
+	{
+		name: 'العربية',
+		code: 'ar'
 	}],
 	translations: {
 		en: require('./en.js'),
-		de: require('./de.js')
+		de: require('./de.js'),
+		ar: require('./ar.js')
 	}
 };

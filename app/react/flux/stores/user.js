@@ -1,25 +1,51 @@
+var ReactFlux = require('react-flux');
+
 var constants = require('../constants/user');
-var Fluxy = require('fluxy');
-module.exports = Fluxy.createStore({
+
+module.exports = ReactFlux.createStore({
+
   getInitialState: function () {
     return {
-      user: null,
-      isAuth: false
+      data: {
+        _id: 1,
+        username: 'Max Mustermann'
+      },
+      isAuth: true
     };
   },
 
-  isAuth: function(){
-    return this.get('isAuth');
+  getData: function(){
+    return this.getState().data;
   },
+
+  isAuth: function(){
+    return this.getState().isAuth;
+  }
+
+},[
   
-  actions: [
-  [constants.LOGIN_COMPLETED, function (user) {
-    this.set('user', user);
-    this.set('isAuth', true);
+  [constants.USER_LOGIN_SUCCESS, function (payload) {
+    this.setState({
+      data: payload,
+      isAuth: true
+    });
   }],
-  [constants.LOGOUT_COMPLETED, function () {
-    this.set('user', null);
-    this.set('isAuth', false);
+
+  [constants.USER_LOGOUT_SUCCESS, function () {
+    console.log("UserStore.logout.success");
+    this.setState({
+      data: null,
+      isAuth: false
+    });
   }],
-  ]
-});
+
+  [constants.USER_EDIT_DATA_SUCCESS, function(payload){
+    var data = this.getState().data;
+    data.username = payload.username;
+    this.setState({
+      data: data
+    });
+
+  }]
+
+]);
