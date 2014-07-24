@@ -1,7 +1,7 @@
 ReactJs-Phonegap
 ================
 
-A boilerplate ReactJS-Phonegap App
+A boilerplate ReactJS-Phonegap App (+With Flux data flow)
 
 ![screenshot](https://raw.githubusercontent.com/kjda/ReactJs-Phonegap/master/screenshot0.jpg)
 
