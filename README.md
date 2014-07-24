@@ -21,9 +21,9 @@ $ git clone https://github.com/kjda/ReactJs-Phonegap.git
 * Set it up
 ```
 $ cd ReactJs-Phonegap/app
- npm run setup
- gulp create
- gulp build-app
+$  npm run setup
+$  gulp create
+$  gulp build-app
 ```
 
 * Run it
