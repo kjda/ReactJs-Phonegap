@@ -36,9 +36,9 @@ module.exports = React.createClass({
       <IScroll>
       <div className="text-center">
       <h3>{__('welcome')}</h3>
-      <button href="/#login" className="topcoat-button--cta">{__('login')}</button>
+      <button href="#login" className="topcoat-button--cta">{__('login')}</button>
       <br />
-      <a href="/#signup" className="topcoat-button">{__('signup')}</a>
+      <a href="#signup" className="topcoat-button">{__('signup')}</a>
       </div>
       </IScroll>
       );

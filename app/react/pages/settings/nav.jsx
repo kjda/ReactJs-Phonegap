@@ -6,9 +6,9 @@ module.exports = React.createClass({
 
   getLinks: function(){
     return [
-    {url: '/#settings', label: __('Profile')}, 
-    {url: '/#settings/photos', label: __('Photo')}, 
-    {url: '/#settings/language', label: __('Language')}
+    {url: '#settings', label: __('Profile')}, 
+    {url: '#settings/photos', label: __('Photo')}, 
+    {url: '#settings/language', label: __('Language')}
     ];
   },
   

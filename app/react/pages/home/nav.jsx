@@ -8,9 +8,9 @@ module.exports = React.createClass({
   
   getLinks: function(){
     return [
-    {url: '/#', label: __('Home')}, 
-    {url: '/#/test1/param1', label: __('Test1')}, 
-    {url: '/#/test2/param2', label: __('Test2')} 
+    {url: '#', label: __('Home')}, 
+    {url: '#/test1/param1', label: __('Test1')}, 
+    {url: '#/test2/param2', label: __('Test2')} 
     ]
   },
   

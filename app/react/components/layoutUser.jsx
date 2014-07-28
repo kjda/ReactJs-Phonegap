@@ -31,9 +31,9 @@ module.exports = React.createClass({
     <div className="snap-drawers">
     <div className="snap-drawer snap-drawer-left">
     <ul>
-    <li><a href="/#" onClick={this.hideNav}>{__('nav.home')}</a></li>
-    <li><a href="/#settings" onClick={this.hideNav}>{__('nav.settings')}</a></li>
-    <li><a href="/#logout" onClick={this.hideNav}>{__('nav.logout')}</a></li>
+    <li><a href="#" onClick={this.hideNav}>{__('nav.home')}</a></li>
+    <li><a href="#settings" onClick={this.hideNav}>{__('nav.settings')}</a></li>
+    <li><a href="#logout" onClick={this.hideNav}>{__('nav.logout')}</a></li>
     </ul>
     </div>
 

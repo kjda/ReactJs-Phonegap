@@ -14,8 +14,8 @@ module.exports = React.createClass({
 						{__('app.name')}
 					</div>
 					<ul className="pull-right" style={{margin: 3}}>
-					<li className="pull-left" style={{marginRight:5}}><a href="/#login" className="btn btn-primary navbar-btn">{__('login')}</a></li>
-					<li className="pull-left"><a href="/#signup" className="btn btn-success navbar-btn">{__('signup')}</a></li>
+					<li className="pull-left" style={{marginRight:5}}><a href="#login" className="btn btn-primary navbar-btn">{__('login')}</a></li>
+					<li className="pull-left"><a href="#signup" className="btn btn-success navbar-btn">{__('signup')}</a></li>
 					</ul>
 				</div>
 				</div>
