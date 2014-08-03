@@ -1,5 +1,5 @@
 var React = require('react');
-var __ = require('../flux/stores/i18n')._
+var __ = require('../flux/stores/lang')._
 
 var UserActions = require('../flux/actions/user');
 var UserStore = require('../flux/stores/user');

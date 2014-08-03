@@ -1,9 +1,9 @@
 var ReactFlux = require('react-flux');
-var constants = require('../constants/i18n');
+var constants = require('../constants/lang');
 
 module.exports = ReactFlux.createActions({
 
-		setLocale: [constants.I18N_SET_LOCALE, function (locale) {
+		setLocale: [constants.SET_LOCALE, function (locale) {
 			return {
 				locale: locale
 			};

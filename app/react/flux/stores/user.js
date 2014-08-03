@@ -1,5 +1,4 @@
 var ReactFlux = require('react-flux');
-
 var constants = require('../constants/user');
 
 module.exports = ReactFlux.createStore({
@@ -15,23 +14,31 @@ module.exports = ReactFlux.createStore({
   },
 
   getData: function(){
-    return this.getState().data;
+    return this.state.get('data');
   },
 
   isAuth: function(){
-    return this.getState().isAuth;
+    return this.state.get('isAuth');
   }
 
 },[
   
-  [constants.USER_LOGIN_SUCCESS, function (payload) {
+  [constants.LOGIN_SUCCESS, function (payload) {
     this.setState({
       data: payload,
       isAuth: true
     });
   }],
 
-  [constants.USER_LOGOUT_SUCCESS, function () {
+
+  [constants.LOGIN_FAIL, function (error) {
+    this.setState({
+      isAuth: false,
+      error: error.message
+    });
+  }],
+
+  [constants.LOGOUT_SUCCESS, function () {
     console.log("UserStore.logout.success");
     this.setState({
       data: null,
@@ -39,8 +46,8 @@ module.exports = ReactFlux.createStore({
     });
   }],
 
-  [constants.USER_EDIT_DATA_SUCCESS, function(payload){
-    var data = this.getState().data;
+  [constants.EDIT_DATA_SUCCESS, function(payload){
+    var data = this.state.get('data');
     data.username = payload.username;
     this.setState({
       data: data

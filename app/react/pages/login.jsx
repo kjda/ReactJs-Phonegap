@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-var __ = require('../flux/stores/i18n')._
+var __ = require('../flux/stores/lang')._
 
 var UserStore = require('../flux/stores/user');
 var UserActions = require('../flux/actions/user');
@@ -21,11 +21,11 @@ module.exports = React.createClass({
   },
   
   componentWillMount: function(){
-    UserStore.onChange(this.onUserChange);
+    UserStore.onChange( this.onUserChange );
   },
 
   componentWillUnmount: function(){
-    UserStore.offChange(this.onUserChange);
+    UserStore.offChange( this.onUserChange );
   },
 
   onUserChange: function(){
@@ -35,10 +35,6 @@ module.exports = React.createClass({
   },
   
   render: function() {
-    var error = null;
-    if( this.state.error ){
-      error = <div className="alert alert-danger">{this.state.error}</div>;
-    }
     return (
       <div className="p10">
       <form role="form" className="box">
@@ -50,10 +46,17 @@ module.exports = React.createClass({
       <label htmlFor="pass">{__('Password')}</label>
       <input ref="password" type="password" className="form-control" id="pass" />
       </div>
-      {error}
+      {this.renderStatus()}
       <button type="submit" className="btn btn-default" onClick={this.login}>{__('login')}</button>
       </form>
       </div>
       );
+  },
+
+  renderStatus: function(){
+    if( !this.state.error ){
+      return;
+    }
+    return <div className="alert alert-danger">{this.state.error}</div>;
   }
 });

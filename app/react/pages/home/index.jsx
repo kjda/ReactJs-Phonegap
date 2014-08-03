@@ -3,7 +3,7 @@ var React = require('react');
 var IScroll = require('../../components/iscroll');
 var Navigation = require('./nav');
 var Ipsum = require('../../components/ipsum');
-var __ = require('../../flux/stores/i18n')._
+var __ = require('../../flux/stores/lang')._
 
 module.exports = React.createClass({
 
@@ -36,9 +36,9 @@ module.exports = React.createClass({
       <IScroll>
       <div className="text-center">
       <h3>{__('welcome')}</h3>
-      <button href="#login" className="topcoat-button--cta">{__('login')}</button>
+      <a href="#login" className="btn btn-default">{__('login')}</a>
       <br />
-      <a href="#signup" className="topcoat-button">{__('signup')}</a>
+      <a href="#signup" className="btn btn-default">{__('signup')}</a>
       </div>
       </IScroll>
       );

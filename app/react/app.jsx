@@ -7,7 +7,7 @@ var LayoutPublic = require('./components/layoutPublic');
 var Dialogs = require('./mixins/dialogs');
 var PushNotifications = require('./mixins/pushNotifications');
 var Offline = require('./pages/offline');
-var I18nStore = require('./flux/stores/i18n');
+var LangStore = require('./flux/stores/lang');
 
 var ReactFlux = require('react-flux');
 var UserStore = require('./flux/stores/user');
@@ -15,13 +15,13 @@ var UserStore = require('./flux/stores/user');
 
 module.exports = React.createClass({
 
-	mixins: [Dialogs, PushNotifications],
+	mixins: [Dialogs, PushNotifications, UserStore.mixin()],
 	
 	router: require('./util/router'),
 	
 	routes: require('./routes'),
 
-	getInitialState: function(){
+	getStateFromStores: function(){
 		return {
 			ready: true,
 			path: null,
@@ -34,27 +34,42 @@ module.exports = React.createClass({
 	},
 	
 	componentWillMount: function(){
-		UserStore.onChange(this.onUserChanged);
+		this.initApp();
+	},
+
+	componentDidMount: function(){
+		FastClick(document.body);
+		this.router.start(this, this.routes);
+	},
+
+	initApp: function(){
 		document.addEventListener('backbutton', this.handleBackButton, false);
 		document.addEventListener('offline', this.onOffline, false);
 		document.addEventListener('online', this.onOnline, false);
 		document.addEventListener("resume", this.onResume, false);
+		if( this.isAndroid() ){
+			this.initAndroid();
+		}
+		if( this.isIOS() ){
+			this.initIOS();
+		}
 	},
-	componentWillUnmount: function () {
-		UserStore.offChange(this.onUserChanged);
-	},
-	componentDidMount: function(){
-		FastClick(document.body);
-		this.router.start(this, this.routes);
 
+	initAndroid: function(){
+		$(document.body).addClass('android');
 	},
-	onUserChanged: function(){
-		this.setState({
-			user: UserStore.getData(),
-			isAuth: UserStore.isAuth()
-		});
-		this.forceUpdate();
+
+	initIOS: function(){
+		$(document.body).addClass('ios');
+		if( this.isIOS7() ){
+			this.initIOS7();
+		}
 	},
+
+	initIOS7: function(){
+		$(document.body).addClass('ios7');
+	},
+
 	handleBackButton: function(){
 		switch( this.state.path ){
 			case '':
@@ -95,8 +110,7 @@ module.exports = React.createClass({
 		this.setState({
 			page: pageClass,
 			routeParams: routeParams,
-			path: path,
-			pageTitle: ''
+			path: path
 		});
 	},
 
@@ -112,11 +126,11 @@ module.exports = React.createClass({
 	},
 
 	isAndroid: function() {
-		return (device.platform.toLowerCase() == "android");
+		return (!!window.device && window.device.platform.toLowerCase() == "android");
 	},
 
 	isIOS: function() {
-		return (device.platform.toLowerCase() == "ios")
+		return (!!window.device && window.device.platform.toLowerCase() == "ios")
 	},
 
 	isIOS7: function(){
@@ -136,7 +150,7 @@ module.exports = React.createClass({
 	},
 	
 	getDeviceUuid: function() {
-		return window.device.uuid;
+		return !!window.device ? window.device.uuid : null;
 	},
 	
 	render: function(){
@@ -165,7 +179,7 @@ module.exports = React.createClass({
 			user={this.state.user}
 			isAuth={this.state.isAuth}
 			pageTitle={this.state.pageTitle}
-			locale={I18nStore.getLocale()}
+			locale={LangStore.getLocale()}
 			showBackButton={showBackButton}
 			back={this.handleBackButton}  />);
 	},

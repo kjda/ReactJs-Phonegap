@@ -6,17 +6,17 @@ var loginService = require('../services/login');
 
 module.exports = ReactFlux.createActions({
 
-	login: [userConstants.USER_LOGIN, function (email, password) {
+	login: [userConstants.LOGIN, function (email, password) {
 		console.log("UserActions.login");
 		return loginService.login(email, password);
 	}],
 
-	logout: [userConstants.USER_LOGOUT, function () {
+	logout: [userConstants.LOGOUT, function () {
 		console.log("UserActions.logout");
 		return loginService.logout();
 	}],
 
-	edit: [userConstants.USER_EDIT_DATA, function(username){
+	edit: [userConstants.EDIT_DATA, function(username){
 		console.log("UserActions.edit");
 		return {
 			username: username

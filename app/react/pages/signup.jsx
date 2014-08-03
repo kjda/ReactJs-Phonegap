@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var IScroll = require('../components/iscroll');
-var __ = require('../flux/stores/i18n')._
+var __ = require('../flux/stores/lang')._
 
 module.exports = React.createClass({
   getInitialState: function(){

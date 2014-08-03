@@ -1,13 +1,15 @@
 var storage = require('../../util/storage');
-var constants = require('../constants/i18n');
+var constants = require('../constants/lang');
 var ReactFlux = require('react-flux');
-var i18n = require('./i18n/index');
+var Lang = require('./lang/index');
+var _ = require('underscore');
 
 var Store = ReactFlux.createStore({
 
   getInitialState: function(){
     return {
-      locale: null
+      locale: null,
+      selected: null
     };
   },
 
@@ -16,21 +18,33 @@ var Store = ReactFlux.createStore({
   },
 
   setLocale: function(locale){
-    if( !locale || typeof i18n.translations[locale] == 'undefined' ){
-      locale =  i18n.defaultLocale;
+    if( !locale || typeof Lang.translations[locale] == 'undefined' ){
+      locale =  Lang.defaultLocale;
     }
     this.setState({
-      locale: locale
+      locale: locale,
+      selected: this.getLanguage(locale)
     });
     storage.setItem('locale', locale);
   },
 
-  getLocale: function(){
-    return this.getState().locale;
-  },
 
   getLanguages: function(){
-    return i18n.languages;
+    return Lang.languages;
+  },
+
+  getLocale: function(){
+    return this.state.get('locale');
+  },
+
+  getSelected: function(){
+    return this.getLanguage(this.state.get('locale'));
+  },
+  
+  getLanguage: function(locale){
+    return _.find(Lang.languages, function(lang){
+      return lang.code == locale;
+    });
   },
 
   /**
@@ -39,8 +53,8 @@ var Store = ReactFlux.createStore({
   _: function(key, params){
     key = key.toLowerCase();
     params = params || {};
-    var locale = this.getState().locale;
-    var t = i18n.translations[locale][key];
+    var locale = this.state.get('locale');
+    var t = Lang.translations[locale][key];
     if( typeof t == 'undefined' ){
       return '?:' + key;
     }
@@ -52,7 +66,7 @@ var Store = ReactFlux.createStore({
   }
 }, [
 
-  [constants.I18N_SET_LOCALE_SUCCESS, function (payload) {
+  [constants.SET_LOCALE_SUCCESS, function (payload) {
     this.setState({
       locale: payload.locale
     });

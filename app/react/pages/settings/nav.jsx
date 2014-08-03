@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var SubNav = require('../../components/subNav');
-var __ = require('../../flux/stores/i18n')._
+var __ = require('../../flux/stores/lang')._
 module.exports = React.createClass({
 
   getLinks: function(){

@@ -2,7 +2,7 @@
 var React = require('react');
 var IScroll = require('../../components/iscroll');
 var Navigation = require('./nav');
-var __ = require('../../flux/stores/i18n')._
+var __ = require('../../flux/stores/lang')._
 
 
 module.exports = React.createClass({

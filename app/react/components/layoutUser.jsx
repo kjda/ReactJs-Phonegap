@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-var __ = require('../flux/stores/i18n')._
+var __ = require('../flux/stores/lang')._
 
 module.exports = React.createClass({
 
@@ -65,13 +65,15 @@ module.exports = React.createClass({
     </div>
     </div>
     );
-},
-renderBackButton: function(){
-  if( !this.props.showBackButton ){
-    return;
+  },
+
+  renderBackButton: function(){
+    if( !this.props.showBackButton ){
+      return;
+    }
+    return (
+      <i className="pull-right ion-ios7-undo back-button" onClick={this.props.back} />
+      );
   }
-  return (
-    <i className="pull-right ion-ios7-undo back-button" onClick={this.props.back} />
-    );
-}
+  
 });

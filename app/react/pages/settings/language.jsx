@@ -2,56 +2,48 @@
 var React = require('react');
 var _ = require('underscore');
 var Navigation = require('./nav');
-var I18nStore = require('../../flux/stores/i18n');
-var I18nActions = require('../../flux/actions/i18n')
-var __ = I18nStore._;
+var LangStore = require('../../flux/stores/lang');
+var LangActions = require('../../flux/actions/lang')
+var __ = LangStore._;
 
 module.exports = React.createClass({
 
   getInitialState: function(){
+    return this.getStateFromStores();
+  },
+
+  getStateFromStores: function(){
     return {
-      languages: I18nStore.getLanguages(),
-      locale: I18nStore.getLocale()
+      languages: LangStore.getLanguages(),
+      selected: LangStore.getSelected()
     } 
   },
 
-  componentWillMount: function(){
-    I18nStore.onChange(this.onI18nChange);
-  },
-
-  componentWillUnmount: function(){
-    I18nStore.offChange(this.onI18nChange);
-  },
-
-  onI18nChange: function(){
-    this.setState({
-      languages: I18nStore.getLanguages(),
-      locale: I18nStore.getLocale()
-    });
+  setPageTitle: function(){
     this.props.setPageTitle(__('language'));
   },
 
   componentDidMount: function(){
-    this.props.setPageTitle(__('language'));
+    LangStore.onChange( this.onLanguageChange );
+    this.setPageTitle();
   },
 
-  getSelectedLanguage: function(){
-    for(var i=0; i < this.state.languages.length; i++){
-      if( this.state.languages[i].code == this.state.locale ){
-        return this.state.languages[i];
-      }
-    }
-    return null;
+  componentWillUnmount: function(){
+    LangStore.offChange( this.onLanguageChange );
   },
-  
+
+  onLanguageChange: function(){
+    this.setState( this.getStateFromStores() );
+    this.setPageTitle();
+  },
+
   selectLang: function(code){
-    I18nActions.setLocale(code);
+    LangActions.setLocale(code);
     return false;
   },
 
   render: function(){
-
-    var selected = this.getSelectedLanguage();
+    var selected = this.state.selected;
     if( !selected ){
       selected = this.state.languages[0];
     }

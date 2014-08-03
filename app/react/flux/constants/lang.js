@@ -2,4 +2,4 @@ var ReactFlux = require('react-flux');
 
 module.exports = ReactFlux.createConstants([
 	'SET_LOCALE'
-], 'I18N');
+], 'LANG');

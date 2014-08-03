@@ -1,6 +1,6 @@
 module.exports = {
 	'app.name': 'التطبيق',
-	'nav.home': 'الريسة',
+	'nav.home': 'الرئيسة',
 	'nav.settings': 'الاعدادات',
 	'nav.logout': 'خروج',
 	'login': 'تسجيل الدخول',

@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-var __ = require('../flux/stores/i18n')._
+var __ = require('../flux/stores/lang')._
 
 module.exports = React.createClass({
 	render: function() {
