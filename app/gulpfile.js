@@ -1,5 +1,3 @@
-///var/www/ReactCordovaApp/app/phonegap-app/platforms/android$ keytool -genkey -v -keystore release.keystore1 -alias key1 -keyalg RSA -keysize 2048 -validity 20000 --storepass ttbeeq80 --keypass ttbeeq80
-
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var react = require('gulp-react');
@@ -86,8 +84,8 @@ function getSplashscreenXML(){
 }
 gulp.task('default', function(){
 	gulp.watch([
-		'./react/**/*.jsx',
-		'./react/**/*.js',
+		'./src/**/*.jsx',
+		'./src/**/*.js',
 		'./assets-src/less/*.less'
 	], ['build-app']);
 });
@@ -114,8 +112,8 @@ gulp.task('clean-build', function(){
 
 gulp.task('compile-jsx', function(){
 	return gulp.src([
-		'./react/**/*.jsx',
-		'./react/**/*.js'
+		'./src/**/*.jsx',
+		'./src/**/*.js'
 	])
 	.pipe(plumber())
 	.pipe(react({ addPragma: false }))
@@ -169,12 +167,12 @@ gulp.task('bundle-js', function(){
 });
 
 gulp.task('copy-index', function(){
-	return gulp.src('./react/index.html')
+	return gulp.src('./src/index.html')
 	.pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/'))
 });
 
 gulp.task('copy-config-xml', function(){
-	return gulp.src('./react/config.xml')
+	return gulp.src('./src/config.xml')
 	.pipe(replace(/{NAMESPACE}/g, configs.app.namespace))
 	.pipe(replace(/{VERSION}/g, configs.app.version))
 	.pipe(replace(/{APP_NAME}/g, configs.app.name))
@@ -199,7 +197,7 @@ gulp.task('copy-resources', function(){
 });
 
 gulp.task('notify-me', function(){
-	return gulp.src('./react/index.html')
+	return gulp.src('./src/index.html')
 				.pipe(notify({title: 'DONE', message: 'build-app complete!'}));
 });
 
