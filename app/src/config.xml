@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<widget xmlns = "http://www.w3.org/ns/widgets"
+  xmlns:gap = "http://phonegap.com/ns/1.0"
+  id = "{NAMESPACE}"
+  version = "{VERSION}">
+  
+  <name>{APP_NAME}</name>
+  
+  <description>
+    {APP_DESCRIPTION}
+  </description>
+  
+  <author href="{AUTHOR_WEBISTE}" email="{AUTHOR_EMAIL}">
+    {AUTHOR_NAME}
+  </author>
+  
+  <gap:platform name="ios" />
+  <gap:platform name="android" />
+
+  <!--
+   Enable individual API permissions here.
+   The "device" permission is required for the 'deviceready' event.
+ -->
+ <feature name="http://api.phonegap.com/1.0/device" />
+ 
+ <!-- Customize your app and platform with the preference element. -->
+ <preference name="phonegap-version" value="3.1.0" /> <!-- all: current version of PhoneGap -->
+ <preference name="auto-hide-splash-screen" value="false" />
+ <preference name="AutoHideSplashScreen" value="false" />
+ <preference name="orientation" value="{ORIENTATION}" /> <!-- all: default means both landscape and portrait are enabled -->
+ <preference name="target-device" value="{TARGET_DEVICE}" /> <!-- all: possible values handset, tablet, or universal -->
+ <preference name="fullscreen" value="false" /> <!-- all: hides the status bar at the top of the screen -->
+ <preference name="webviewbounce" value="false" /> <!-- ios: control whether the screen 'bounces' when scrolled beyond the top -->
+ <preference name="prerendered-icon" value="true" /> <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
+ <preference name="detect-data-types" value="true" /> <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
+ <preference name="exit-on-suspend" value="{EXIT_ON_SUSPEND}" /> <!-- ios: if set to true, app will terminate when home button is pressed -->
+ <preference name="show-splash-screen-spinner" value="true" /> <!-- ios: if set to false, the spinner won't appear on the splash screen during app loading -->
+ <preference name="disable-cursor" value="true" /> <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
+ <preference name="ios-statusbarstyle" value="black-translucent" />
+ <preference name="SuppressesIncrementalRendering" value="true"/>
+ <preference name="FadeSplashScreenDuration" value="1"/>
+
+
+ <!-- Plugins can also be added here.!! -->
+ <plugin name="Notification" value="CDVNotification" />
+ {PLUGINS}
+ 
+
+  <!--
+   <gap:plugin name="Example" /> 
+   A list of available plugins are available at https://build.phonegap.com/docs/plugins
+ -->
+ 
+ <!-- Define app icon for each platform. -->
+ {ICONS}
+ 
+ <!-- Define app splash screen for each platform. -->
+ {SPLASHSCREENS}
+ <gap:splash src="img/splash/splash-640x920.png" gap:platform="android" gap:density="mdpi" />
+ <gap:splash src="img/splash/splash-1024x748.png" gap:platform="android" gap:density="hdpi" />
+ <gap:splash src="img/splash/splash-1536x2008.png" gap:platform="android" gap:density="xhdpi" />
+ 
+  <!--
+   Define access to external domains.
+   
+   <access /> - a blank access tag denies access to all external resources.
+   <access origin="*" /> - a wildcard access tag allows access to all external resource.
+   
+   Otherwise, you can specify specific domains:
+ -->
+ <access origin="{ACCESS_ORIGIN}" />
+  <!--
+   <access origin="http://phonegap.com" /> - allow any secure requests to http://phonegap.com/
+   <access origin="http://phonegap.com" subdomains="true" /> - same as above, but including subdomains, such as http://build.phonegap.com/
+   <access origin="http://phonegap.com" browserOnly="true" /> - only allows http://phonegap.com to be opened by the child browser.
+ -->
+ 
+</widget>
