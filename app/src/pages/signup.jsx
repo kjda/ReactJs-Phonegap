@@ -2,6 +2,7 @@
 var React = require('react');
 var IScroll = require('../components/iscroll');
 var __ = require('../flux/stores/lang')._
+var UI = require('react-topui');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -19,27 +20,27 @@ module.exports = React.createClass({
       <div className="box">
       <form role="form">
       
-      <div className="form-group">
-      <input ref="email" type="email" className="form-control" placeholder={__('email')} />
+      <div className="p5">
+        <UI.TextInput full ref="email" type="email" className="p5" placeholder={__('email')} />
       </div>
       
-      <div className="form-group">
-      <input ref="username" type="username" className="form-control" placeholder={__('username')}  />
+      <div className="p5">
+        <UI.TextInput full ref="username" type="username" className="p5" placeholder={__('username')}  />
       </div>
       
-      <div className="form-group">
-      <input ref="password" type="password" className="form-control" placeholder={__('password')} />
+      <div className="p5">
+        <UI.TextInput full ref="password" type="password" className="p5" placeholder={__('password')} />
       </div>
 
 
-      <div className="form-group"  >
-      <label className="checkbox no-outline" >
-      <input ref="terms" type="checkbox"  /> <span style={{margin:10, display: 'inline-block'}}>{__('agree.terms')}</span>
-      </label>
+      <div className="p5"  >
+        <UI.Checkbox ref="terms" type="checkbox" label={__('agree.terms')} /> 
       </div>
 
-      <div className="form-group text-center">
-      <button ref="submit" type="submit" className="btn btn-primary btn-lg" onClick={this.register}>{__('signup.submit')}</button>
+      <div className="p10 text-center">
+        <UI.Button cta ref="submit" type="submit" onClick={this.register}>
+          {__('signup.submit')}
+        </UI.Button>
       </div>
       
       </form>

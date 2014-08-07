@@ -44,6 +44,15 @@ module.exports = ReactFlux.createStore({
       data: null,
       isAuth: false
     });
+    console.log("UserStore.logout.success.after");
+  }],
+
+  [constants.LOGOUT_FAIL, function () {
+    console.log("UserStore.logout.fail");
+    this.setState({
+      data: null,
+      isAuth: false
+    });
   }],
 
   [constants.EDIT_DATA_SUCCESS, function(payload){

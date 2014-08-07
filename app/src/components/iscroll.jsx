@@ -1,10 +1,32 @@
 /** @jsx React.DOM */
 var React = require('react');
 var $ = require('jquery');
+var IScroll = require('iscroll');
 
 module.exports = React.createClass({
 
 	componentDidMount: function(){
+		this.attachScroller();
+	},
+
+	componentDidUpdate: function(){
+		this.refreshScroller();
+	},
+
+	componentWillUnmount: function(){
+		if( !this.scroller ){
+			return;
+		}
+		this.scroller.off('scrollEnd');
+		this.scroller.destroy();
+		window.removeEventListener('orientationchange', this.refreshScroller, false);
+		window.removeEventListener('hidekeyboard', this.refreshScroller, false);
+	},
+
+	attachScroller: function(){
+		if( !this.isMounted() ){
+			return;
+		}
 		this.wrapper = $(this.refs.wrapper.getDOMNode());
 		this.scroller = new IScroll(this.refs.wrapper.getDOMNode(), {
 			//click: true,
@@ -17,23 +39,15 @@ module.exports = React.createClass({
 	    //useTransform:true
 	    
 	  });
-		setTimeout(this.refreshScroller, 0);
+		
 		window.addEventListener('orientationchange', this.refreshScroller, false);
+		window.addEventListener('hidekeyboard', this.refreshScroller, false);
 		this.scroller.on('scrollEnd', function () {
 			if(Math.abs(this.scroller.maxScrollY) - Math.abs(this.scroller.y) < 200){
 				!!this.props.onScrollToBottom && this.props.onScrollToBottom();
 			}
 		}.bind(this));
-	},
-
-	componentDidUpdate: function(){
-		setTimeout(this.refreshScroller, 0);
-	},
-
-	componentWillUnmount: function(){
-		this.scroller.off('scrollEnd');
-		this.scroller.destroy();
-		window.removeEventListener('orientationchange', this.refreshScroller, false);
+		this.refreshScroller();
 	},
 
 	refreshScroller: function(){

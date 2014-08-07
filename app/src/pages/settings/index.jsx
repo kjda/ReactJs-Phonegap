@@ -8,12 +8,13 @@ var __ = require('../../flux/stores/lang')._
 var UserStore = require('../../flux/stores/user');
 var UserActions = require('../../flux/actions/user');
 
+var UI = require('react-topui');
+
 module.exports = React.createClass({
-  
+
   mixins: [ UserStore.mixin() ],
 
   getStateFromStores: function(){
-    console.log(UserStore.state.get('data'))
     return {
       data: UserStore.state.get('data')
     }
@@ -38,25 +39,28 @@ module.exports = React.createClass({
     return false;
   },
 
+
   render: function() {
     return (
       <div>
-      <Navigation />
-      <IScroll>
-      <div  className="p10">
-      <div className="form-group">
-      <label>{__('username')}</label>
-      <input type="text" 
-        ref="username" 
-        value={this.state.data.username} 
-        className="form-control"
-        onChange={this.onDataChange.bind(this, 'username')} />
-      </div>
-      <div className="form-group">
-      <button className="btn btn-primary" onClick={this.save}>{__('Save')}</button>
-      </div>
-      </div>
-      </IScroll>
+        <Navigation />
+        <IScroll>
+            <div className="p10">
+              <label>{__('username')}</label>
+              <br />
+              <UI.TextInput
+                  full 
+                  type="text" 
+                  ref="username" 
+                  value={this.state.data.username} 
+                  onChange={this.onDataChange.bind(this, 'username')} />
+            </div>
+            <div className="p10">
+              <UI.Button 
+                  cta 
+                  onClick={this.save}>{__('Save')}</UI.Button>
+            </div>
+        </IScroll>
       </div>
       );
   }

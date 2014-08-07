@@ -5,6 +5,7 @@ var Navigation = require('./nav');
 var LangStore = require('../../flux/stores/lang');
 var LangActions = require('../../flux/actions/lang')
 var __ = LangStore._;
+var UI = require('react-topui');
 
 module.exports = React.createClass({
 
@@ -26,6 +27,7 @@ module.exports = React.createClass({
   componentDidMount: function(){
     LangStore.onChange( this.onLanguageChange );
     this.setPageTitle();
+    this.checkSelected();
   },
 
   componentWillUnmount: function(){
@@ -35,6 +37,7 @@ module.exports = React.createClass({
   onLanguageChange: function(){
     this.setState( this.getStateFromStores() );
     this.setPageTitle();
+    this.checkSelected();
   },
 
   selectLang: function(code){
@@ -42,34 +45,41 @@ module.exports = React.createClass({
     return false;
   },
 
-  render: function(){
+  checkSelected: function(){
     var selected = this.state.selected;
     if( !selected ){
-      selected = this.state.languages[0];
+      return;
     }
-
+    this.refs[selected.code].getDOMNode().checked = true;
+  },
+  render: function(){
+    
     var langs = [];
     _.each(this.state.languages, function(lang){
-      var selectedIndicator = null;
-      if ( lang.code == selected.code ){
-        selectedIndicator = <i className="ion-ios7-checkmark pull-right" style={{fontSize:20}} />;
+      var icon = null;
+      if( lang.code == this.state.selected.code ){
+        icon = <UI.Icon name="checkmark" style={{fontSize: "150%"}} />
       }
       langs.push(
-        <li key={lang.code} className="list-group-item"  onClick={this.selectLang.bind(this, lang.code)}>
-        {selectedIndicator}
-        {lang.name}
-        </li>
-        );
+        <UI.ListItem 
+            key={lang.code}
+            ref={lang.code} 
+            onClick={this.selectLang.bind(this, lang.code)}>
+        {icon} {lang.name}
+        </UI.ListItem>
+      );
     }.bind(this));
     
     return(
       <div>
-      <Navigation />
-      <div className="p10">
-      <ul className="list-group">
-      {langs}                
-      </ul>
-      </div>
+        <Navigation />
+        <div className="p10">
+          <UI.List>
+            <UI.ListContainer>
+              {langs}           
+            </UI.ListContainer>     
+          </UI.List>
+        </div>
       </div>
       );
   }

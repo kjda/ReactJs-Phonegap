@@ -13,6 +13,8 @@ var ReactFlux = require('react-flux');
 var UserStore = require('./flux/stores/user');
 
 
+React.initializeTouchEvents(true);
+
 module.exports = React.createClass({
 
 	mixins: [Dialogs, PushNotifications, UserStore.mixin()],
@@ -34,11 +36,12 @@ module.exports = React.createClass({
 	},
 	
 	componentWillMount: function(){
-		this.initApp();
+		
 	},
 
 	componentDidMount: function(){
-		FastClick(document.body);
+		this.initApp();
+		FastClick.call({}, document.body);
 		this.router.start(this, this.routes);
 	},
 
@@ -124,13 +127,19 @@ module.exports = React.createClass({
 		var url = document.URL;
 		return !(url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
 	},
-
+	getPlatform: function(){
+		var platform = '';
+		if( !!window.device && !!window.device.platform ){
+			platform = window.device.platform.toLowerCase();
+		}
+		return platform;
+	},
 	isAndroid: function() {
-		return (!!window.device && window.device.platform.toLowerCase() == "android");
+		return (this.getPlatform() == "android");
 	},
 
 	isIOS: function() {
-		return (!!window.device && window.device.platform.toLowerCase() == "ios")
+		return (this.getPlatform() == "ios")
 	},
 
 	isIOS7: function(){
@@ -155,7 +164,7 @@ module.exports = React.createClass({
 	
 	render: function(){
 		if( !this.state.ready || !this.state.page ){
-			return <div>loadin...</div>;
+			return <div>loading...</div>;
 		}
 		if( this.state.offline ){
 			return this.renderWhenOffline();

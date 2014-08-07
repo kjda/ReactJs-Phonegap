@@ -1,5 +1,6 @@
 module.exports = {
 	'': require('./pages/home'),
+	'dashboard': require('./pages/home/dashboard'),
 	'signup': require('./pages/signup'),
 	'login': require('./pages/login'),
 	'logout': require('./pages/logout'),

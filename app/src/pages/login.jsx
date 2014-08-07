@@ -5,6 +5,8 @@ var __ = require('../flux/stores/lang')._
 var UserStore = require('../flux/stores/user');
 var UserActions = require('../flux/actions/user');
 
+var UI = require('react-topui');
+
 module.exports = React.createClass({
   
   getInitialState: function(){
@@ -30,25 +32,32 @@ module.exports = React.createClass({
 
   onUserChange: function(){
     if( UserStore.isAuth() ){
-      window.location.href = '#';
+      window.location.href = '#dashboard';
     }
   },
   
   render: function() {
     return (
-      <div className="p10">
-      <form role="form" className="box">
-      <div className="form-group">
-      <label htmlFor="email">{__('email')}</label>
-      <input ref="email" type="email" className="form-control" id="email" />
-      </div>
-      <div className="form-group">
-      <label htmlFor="pass">{__('Password')}</label>
-      <input ref="password" type="password" className="form-control" id="pass" />
-      </div>
-      {this.renderStatus()}
-      <button type="submit" className="btn btn-default" onClick={this.login}>{__('login')}</button>
-      </form>
+      <div className="p10 text-center">
+        <form role="form">
+
+          <div className="p10">
+            <label htmlFor="email">{__('email')}</label>
+            <UI.TextInput full ref="email" type="email" id="email" value="Maxmustermann" />
+          </div>
+          
+          <div className="p10">
+            <label htmlFor="pass">{__('Password')}</label>
+            <UI.TextInput full ref="password" type="password" id="pass" value="123456" />
+          </div>
+          
+          {this.renderStatus()}
+          
+          <div className="p10">
+            <UI.Button cta type="submit" onClick={this.login}>{__('login')}</UI.Button>
+          </div>
+          
+        </form>
       </div>
       );
   },
