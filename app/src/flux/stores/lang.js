@@ -56,13 +56,13 @@ var Store = ReactFlux.createStore({
     var locale = this.state.get('locale');
     var t = Lang.translations[locale][key];
     if( typeof t == 'undefined' ){
-      return '?:' + key;
+      return  key;
     }
     
     for(var i in params){
       t = t.replace('{' + i + '}', params[i]);
     }
-    return '_:' + t;
+    return t;
   }
 }, [
 
