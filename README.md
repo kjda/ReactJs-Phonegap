@@ -3,7 +3,7 @@ ReactJs-Phonegap
 
 A boilerplate ReactJS-Phonegap App (+With [ReactFlux][1])
 
-UI using https://github.com/kjda/react-topui
+UI [react-topui][2]
 
 Demo
 ====
@@ -35,7 +35,7 @@ $  gulp build-app
 $ gulp serve
 ```
 
-* Point your [Phonegap Developer App][2] to the suggested URL
+* Point your [Phonegap Developer App][3] to the suggested URL
 
 That's it!
 
@@ -50,4 +50,5 @@ this will rebuild the app once you edit the source code
 Build configurations are located in app/build.configs.js
 
 [1]: https://github.com/kjda/ReactFlux
-[2]: https://github.com/phonegap/phonegap-app-developer
+[2]: using https://github.com/kjda/react-topui
+[3]: https://github.com/phonegap/phonegap-app-developer
