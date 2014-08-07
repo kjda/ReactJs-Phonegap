@@ -85,7 +85,7 @@ module.exports = React.createClass({
       return;
     }
     return (
-      <UI.Icon name="back" onTouchStart={this.props.back}  className='nav-bar-icon' />
+      <UI.Icon name="back" onClick={this.props.back}  className='nav-bar-icon' />
     );
   }
   
