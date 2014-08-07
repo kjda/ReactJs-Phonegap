@@ -46,9 +46,4 @@ this will rebuild the app once you edit the source code
 Build configurations are located in app/build.configs.js
 
 
-Server
-======
-The server part is just sitting there as a motivator!
-
-
 [1]: https://github.com/phonegap/phonegap-app-developer
