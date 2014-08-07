@@ -42,7 +42,7 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery'
         }),
+        new UglifyJsPlugin()
       //  new webpack.HotModuleReplacementPlugin()
-        //new UglifyJsPlugin()
     ]
     };
