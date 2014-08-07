@@ -3,7 +3,11 @@ ReactJs-Phonegap
 
 A boilerplate ReactJS-Phonegap App (+With Flux data flow)
 
-![screenshot](https://raw.githubusercontent.com/kjda/ReactJs-Phonegap/master/screenshot0.jpg)
+UI using https://github.com/kjda/react-topui
+
+Demo
+====
+http://kjda.github.io/ReactJs-Phonegap/
 
 How to use?
 ===========
