@@ -50,6 +50,6 @@ this will rebuild the app once you edit the source code
 
 Build configurations are located in app/build.configs.js
 
-[1]: https://github.com/kjda/ReactFlux
-[2]: using https://github.com/kjda/react-topui
-[3]: https://github.com/phonegap/phonegap-app-developer
+[1]: //github.com/kjda/ReactFlux
+[2]: //github.com/kjda/react-topui
+[3]: //github.com/phonegap/phonegap-app-developer
