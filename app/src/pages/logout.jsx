@@ -24,7 +24,7 @@ module.exports = React.createClass({
 	onUserChange: function(){
 		if( !UserStore.isAuth() ){
 			setTimeout(function(){
-			window.location.href = '#';
+				window.location.hash = '#';
 			}, 0);
 		}
 		else{
