@@ -3,7 +3,8 @@ ReactJs-Phonegap
 
 A boilerplate ReactJS-Phonegap App (+With [ReactFlux][1])
 
-UI [React Topcoat UI][2]
+UI using [React-TopcoatUI][2]
+
 
 Demo
 ====
