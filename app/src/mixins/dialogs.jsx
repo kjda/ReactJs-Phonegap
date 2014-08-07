@@ -2,7 +2,7 @@ var __ = require('../flux/stores/lang')._
 
 module.exports = {
 
-	confirm: function(message, onConfirm){
+  confirm: function(message, onConfirm){
     var noYesLabels = __('No') + ',' + __('Yes');
     navigator.notification.confirm(
       message,
