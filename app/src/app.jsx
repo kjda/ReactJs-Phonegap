@@ -12,15 +12,15 @@ var LangStore = require('./flux/stores/lang');
 var ReactFlux = require('react-flux');
 var UserStore = require('./flux/stores/user');
 
-
 React.initializeTouchEvents(true);
+
 
 module.exports = React.createClass({
 
 	mixins: [Dialogs, PushNotifications, UserStore.mixin()],
 	
 	router: require('./util/router'),
-	
+
 	routes: require('./routes'),
 
 	getStateFromStores: function(){

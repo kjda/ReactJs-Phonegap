@@ -2,81 +2,66 @@
 var React = require('react');
 var __ = require('../flux/stores/lang')._
 var UI = require('react-topui');
-var Snap = require('snapjs');
+var Snap = require('./snaplayout');
+var Ipsum = require('./ipsum');
+var IScroll = require('./iscroll');
 
 module.exports = React.createClass({
-
-  componentDidMount: function(){
-    this.snapper = new Snap({
-     element: this.refs.content.getDOMNode(),
-     flickThreshold: 50,
-     disable: 'right'
-   });
-  },
-
-  toggleNav: function(){
-    if( this.snapper.state().state == 'left' ){
-      this.snapper.close();
-    }
-    else{
-      this.snapper.open('left');
-    }
-  },
-
-  hideNav: function(){
-    this.snapper.close();
-  },
-
   render: function() {
-   return ( 
-    <div>
-    <div className="snap-drawers">
-    <div className="snap-drawer snap-drawer-left">
+    return(
+      <Snap.Layout>
+        <Snap.Drawers>
+          
+          <Snap.Left>
+            <UI.List >
+              <UI.ListHeader>
+                ReactJs/Phonegap<br />
+                TopCoat
+              </UI.ListHeader>
+              <UI.ListContainer className="nav-list">
+                <UI.ListItem>
+                  <a href="#dashboard">{__('nav.home')}</a>
+                </UI.ListItem>
+                <UI.ListItem>
+                  <a href="#settings">{__('nav.settings')}</a>
+                </UI.ListItem>
+                <UI.ListItem>
+                  <a href="#logout">{__('nav.logout')}</a>
+                </UI.ListItem>
+              </UI.ListContainer>
+            </UI.List>
+          </Snap.Left>
+          
+          <Snap.Right>
+            <div className="text-justify p10">
+              <Ipsum paragraphs={50} />
+            </div>
+          </Snap.Right>
+        
+        </Snap.Drawers>
+        
+        <Snap.Content>
 
-    <UI.List >
-      <UI.ListHeader>
-        ReactJs/Phonegap<br />
-        TopCoat
-      </UI.ListHeader>
-      <UI.ListContainer>
-        <UI.ListItem>
-          <a href="#dashboard" onClick={this.hideNav}>{__('nav.home')}</a>
-        </UI.ListItem>
-        <UI.ListItem>
-          <a href="#settings" onClick={this.hideNav}>{__('nav.settings')}</a>
-        </UI.ListItem>
-        <UI.ListItem>
-          <a href="#logout" onClick={this.hideNav}>{__('nav.logout')}</a>
-        </UI.ListItem>
-      </UI.ListContainer>
-    </UI.List>
+          <UI.NavBar>
+            <UI.NavBarItem left quarter>
+              <Snap.Toggler side="left">
+              <UI.Icon name="listview" className="nav-bar-icon" />
+              </Snap.Toggler>
+            </UI.NavBarItem>
+            <UI.NavBarItem center half>
+              {this.props.pageTitle}
+            </UI.NavBarItem>
+            <UI.NavBarItem right quarter>
+              {this.renderBackButton()}
+            </UI.NavBarItem>
+          </UI.NavBar>
 
-    </div>
+          <div>
+            {this.props.page}
+          </div>
+        </Snap.Content>
 
-    <div className="snap-drawer snap-drawer-right">
-    </div>
-    </div>
-
-    <div ref="content"  className="snap-content" >
-
-    <UI.NavBar>
-      <UI.NavBarItem left quarter onClick={this.toggleNav}>
-        <UI.Icon name="listview" className='nav-bar-icon' />
-      </UI.NavBarItem>
-      <UI.NavBarItem center half>
-        {this.props.pageTitle}
-      </UI.NavBarItem>
-      <UI.NavBarItem right quarter>
-        {this.renderBackButton()}
-      </UI.NavBarItem>
-    </UI.NavBar>
-
-    <div ref="pageContent" className="page-content">
-    {this.props.page}
-    </div>
-
-    </div>
-    </div>
+      </Snap.Layout>
     );
   },
 
