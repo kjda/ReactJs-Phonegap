@@ -72,12 +72,6 @@ module.exports.Toggler = React.createClass({
 });
 
 
-module.exports.RightToggler = React.createClass({
-  render: function(){
-    return this.transferPropsTo(<span role="right-drawer-toggle">{this.props.children}</span>);
-  }
-});
-
 module.exports.Content = React.createClass({
 
   toggleNav: function(side){
