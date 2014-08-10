@@ -7,8 +7,8 @@ var SubNav = require('../../components/subNav');
 
 module.exports = React.createClass({
 
-  render: function(){
-    var links = [
+  getLinks: function(){
+    return [
       {
         label: __('Home'),
         url: '#dashboard'
@@ -22,7 +22,10 @@ module.exports = React.createClass({
         url: '#test2/param2'
       }
     ];
-    return ( <SubNav links={links} /> );
+  },
+
+  render: function(){
+    return ( <SubNav links={this.getLinks()} /> );
   }
 
 });
