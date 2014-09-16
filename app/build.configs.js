@@ -18,12 +18,12 @@ module.exports = {
 		phonegapPlugins: [
 			{
 				name: 'org.apache.cordova.core.device',
-				installFrom: 'org.apache.cordova.core.device',
+				installFrom: 'https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git',
 				version: null
 			},
 			{
 				name: 'org.apache.cordova.core.dialogs',
-				installFrom: 'org.apache.cordova.core.dialogs',
+				installFrom: 'https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs',
 				version: null
 			},
 			{
@@ -48,7 +48,7 @@ module.exports = {
 			},
 			{
 				name: 'org.apache.cordova.core.inappbrowser',
-				installFrom: 'org.apache.cordova.core.inappbrowser',
+				installFrom: 'https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git',
 				version: null
 			},
 			{
@@ -73,28 +73,28 @@ module.exports = {
 				platform: 'android',
 				width: '36',
 				height: '36',
-				density: 'ldpi' 
+				density: 'ldpi'
 			},
 			{
 				src: 'res/icon/android/icon-48-mdpi.png',
 				platform: 'android',
 				width: '48',
 				height: '48',
-				density: 'mdpi' 
+				density: 'mdpi'
 			},
 			{
 				src: 'res/icon/android/icon-72-hdpi.png',
 				platform: 'android',
 				width: '72',
 				height: '72',
-				density: 'hdpi' 
+				density: 'hdpi'
 			},
 			{
 				src: 'res/icon/android/icon-96-xhdpi.png',
 				platform: 'android',
 				width: '96',
 				height: '96',
-				density: 'xhdpi' 
+				density: 'xhdpi'
 			}
 		],
 		splashscreens: [
@@ -102,15 +102,15 @@ module.exports = {
 				src: 'res/screen/adnroid/screen-hdpi-landscape.png',
 				platform: 'android',
 				width: '800',
-				height: '480' 
+				height: '480'
 			},
 			{
 				src: 'res/screen/adnroid/screen-hdpi-portrait.png',
 				platform: 'android',
 				width: '480',
-				height: '800' 
+				height: '800'
 			},
 		]
 	}
-	
+
 }
