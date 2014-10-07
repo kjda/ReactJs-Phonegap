@@ -44,10 +44,10 @@ That's it!
 * While developing:
 ```
 $ cd ReactJs-Phonegap/app
- gulp
+$ webpack -w
 ```
 
-this will rebuild the app once you edit the source code
+this will rebuild the app automatically every time you edit the source code
 
 Build configurations are located in app/build.configs.js
 
