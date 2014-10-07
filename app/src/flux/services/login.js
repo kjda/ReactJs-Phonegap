@@ -1,4 +1,4 @@
-var Promise = require('es6-promise').Promise;
+var Promise = require('promise');
 
 //dummy login service
 module.exports = {
