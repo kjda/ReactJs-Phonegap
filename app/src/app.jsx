@@ -1,23 +1,22 @@
 /** @jsx React.DOM */
-
+var $ = require('jquery');
 var React = require('react');
 var FastClick = require('fastclick');
 var LayoutUser = require('./components/layoutUser');
 var LayoutPublic = require('./components/layoutPublic');
-var Dialogs = require('./mixins/dialogs');
-var PushNotifications = require('./mixins/pushNotifications');
+var Dialogs = require('./components/dialogs');
 var Offline = require('./pages/offline');
 var LangStore = require('./flux/stores/lang');
 
-var ReactFlux = require('react-flux');
 var UserStore = require('./flux/stores/user');
+var AppStateActions = require('./flux/actions/appState');
+var RouterStore = require('./flux/stores/router');
 
 React.initializeTouchEvents(true);
 
-
 module.exports = React.createClass({
 
-	mixins: [Dialogs, PushNotifications, UserStore.mixin()],
+	mixins: [ UserStore.mixin(), RouterStore.mixin() ],
 	
 	router: require('./util/router'),
 
@@ -25,23 +24,18 @@ module.exports = React.createClass({
 
 	getStateFromStores: function(){
 		return {
-			ready: true,
-			path: null,
-			locale: null,
-			routeParams: {},
+			path: RouterStore.get('path'),
+			routeParams: RouterStore.get('routeParams'),
+			page: RouterStore.get('page'),
 			user: UserStore.getData(),
 			isAuth: UserStore.isAuth()
 		};
 	},
 	
-	componentWillMount: function(){
-		
-	},
-
 	componentDidMount: function(){
 		this.initApp();
 		FastClick.call({}, document.body);
-		this.router.start(this, this.routes);
+		this.router.start(this.routes);
 	},
 
 	initApp: function(){
@@ -75,7 +69,8 @@ module.exports = React.createClass({
 	handleBackButton: function(){
 		switch( this.state.path ){
 			case '':
-			this.confirm('Exit app?', this.exit)
+			case 'dashboard':
+				Dialogs.confirm('Exit app?', this.exit)
 			break;
 			case 'login':
 			case 'signup':
@@ -107,19 +102,12 @@ module.exports = React.createClass({
 	exit: function(){
 		navigator.app.exitApp();
 	},
-	
-	setPage: function(pageClass, routeParams, path){
-		this.setState({
-			page: pageClass,
-			routeParams: routeParams,
-			path: path
-		});
-	},
-	
+		
 	isBrowser: function() {
 		var url = document.URL;
 		return !(url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
 	},
+
 	getPlatform: function(){
 		var platform = '';
 		if( !!window.device && !!window.device.platform ){
@@ -127,6 +115,7 @@ module.exports = React.createClass({
 		}
 		return platform;
 	},
+
 	isAndroid: function() {
 		return (this.getPlatform() == "android");
 	},
@@ -154,40 +143,30 @@ module.exports = React.createClass({
 	getDeviceUuid: function() {
 		return !!window.device ? window.device.uuid : null;
 	},
-	
+
 	render: function(){
-		if( !this.state.ready || !this.state.page ){
+		if( !this.state.page ){
 			return <div>loading...</div>;
 		}
 		if( this.state.offline ){
 			return this.renderWhenOffline();
 		}
-		var routeParams = this.state.routeParams || {};
+
 		var page = new this.state.page({
-			routeParams: routeParams,
-			user: this.state.user,
-			isAuth: this.state.isAuth,
-			setPageTitle: this.setPageTitle
+			routeParams: this.state.routeParams
 		});
 
 		if( !this.state.isAuth ){
-			return (
-				<LayoutPublic 
-				page={page} />
-				);
+			return <LayoutPublic>{page}</LayoutPublic>
 		}
-		var showBackButton = (this.state.path != '');
-		return (<LayoutUser page={page} 
-			user={this.state.user}
-			isAuth={this.state.isAuth}
-			locale={LangStore.getLocale()}
-			showBackButton={showBackButton}
-			back={this.handleBackButton}  />);
+		return (<LayoutUser back={this.handleBackButton}>{page}</LayoutUser>);
 	},
+
 	renderWhenOffline: function(){
 		var offlinePage = new Offline({
 			user: this.state.user
 		});
-		return (<div>{offlinePage}</div>);
+		return (<LayoutPublic>{offlinePage}</LayoutPublic>);
 	}
+
 });

@@ -1,11 +1,15 @@
 var ReactFlux = require('react-flux');
 
-var userConstants = require('../constants/appState');
+var constants = require('../constants/appState');
 
 module.exports = ReactFlux.createActions({
 
-	setTitle: [userConstants.SET_TITLE, function (title) {
-		return {title: title};
+	setTitle: [constants.SET_TITLE, function (title) {
+		return title;
+	}],
+
+	showBackButton: [constants.SHOW_BACK_BUTTON, function (show) {
+		return show;
 	}]
 
 });

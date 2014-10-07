@@ -35,7 +35,9 @@ module.exports.Drawers = React.createClass({
 
 module.exports.Left = React.createClass({
   statics: {
-    identity: function(){return 'Drawers'}
+    identity: function(){
+      return 'Drawers.Left';
+    }
   },
   render: function(){
     return (
@@ -48,7 +50,9 @@ module.exports.Left = React.createClass({
 
 module.exports.Right = React.createClass({
   statics: {
-    identity: function(){return 'Drawers'}
+    identity: function(){
+      return 'Drawers.Right';
+    }
   },
   render: function(){
     return (
@@ -93,7 +97,6 @@ module.exports.Content = React.createClass({
 
   componentDidMount: function(){
     this.leftToggler = $('[role="left-drawer-toggle"]');
-    console.log("LEFT TO " + this.leftToggler.length)
     if( this.leftToggler.length ){
       this.leftToggler.on('click', this.toggleNav.bind(this, 'left'));
     }

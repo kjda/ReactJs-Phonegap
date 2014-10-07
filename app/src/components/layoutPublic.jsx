@@ -20,7 +20,7 @@ module.exports = React.createClass({
 				</UI.NavBar>
 				<SubNav links={links} />
 				<div>
-					{this.props.page}
+					{this.props.children}
 				</div>
 			</div>
 		);

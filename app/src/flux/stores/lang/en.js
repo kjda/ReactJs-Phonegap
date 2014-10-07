@@ -11,7 +11,6 @@ module.exports = {
 	'language': 'Language',
 	'profile': 'Profile',
 	'photo': 'Photo',
-	'home': 'Home',
 	'email': 'Email Address',
 	'password': 'Password',
 	'settings': 'Settings',

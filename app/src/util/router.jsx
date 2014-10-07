@@ -1,16 +1,14 @@
-/**
- * @jsx React.DOM
- */
-
+/** @jsx React.DOM */
  var Backbone = require('backbone');
  Backbone.$ = require('jquery');
+
+var RouterActions = require('../flux/actions/router');
 
  module.exports = {
  	
  	router: null,
 
- 	start: function(_app, routes){
- 		reactApp = _app;
+ 	start: function(routes){
  		var bbRoutes = {};
  		for( var path in routes ){
  			bbRoutes[path] = handleRoute(path, routes[path]);
@@ -38,7 +36,7 @@
  				for(var p in params){
  					_params[p] = arguments[i++] || null;
  				}
- 				_app.setPage(Page, _params, path);
+ 				RouterActions.setPath(path, Page, _params);
  			}
  		}
  	},

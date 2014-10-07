@@ -25,7 +25,7 @@ module.exports = React.createClass({
      
     return (
       <IScroll>
-
+      
       <div className="text-center">
       <br /><br /><br />
       <UI.Icon name="like" style={{fontSize: '220px', color: 'red', textShadow:'3px 3px 5px #464646'}} />

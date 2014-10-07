@@ -11,7 +11,7 @@ module.exports = React.createClass({
   getLinks: function(){
     return [
       {
-        label: __('Home'),
+        label: __('nav.home'),
         url: '#dashboard'
       },
       {

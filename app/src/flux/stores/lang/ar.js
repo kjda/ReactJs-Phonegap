@@ -11,7 +11,6 @@ module.exports = {
 	'language': 'اللغة',
 	'profile': 'ملفي',
 	'photo': 'صورتي',
-	'home': '',
 	'email': 'البريد الالكتروني',
 	'password': 'كلمة المرور',
 	'settings': 'الإعدادات',

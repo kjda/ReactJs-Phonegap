@@ -14,7 +14,8 @@ module.exports = React.createClass({
 
   getStateFromStores: function(){
     return {
-      pageTitle: AppStateStore.get('title')
+      pageTitle: AppStateStore.get('title'),
+      showBackButton: AppStateStore.get('showBackButton')
     }
   },
 
@@ -64,12 +65,14 @@ module.exports = React.createClass({
             </UI.NavBarItem>
             <UI.NavBarItem right quarter>
               {this.renderBackButton()}
+              <UI.Icon name="arrowright" role="right-drawer-toggle" className='nav-bar-icon' />
             </UI.NavBarItem>
           </UI.NavBar>
 
           <div>
-            {this.props.page}
+            {this.props.children}
           </div>
+
         </Snap.Content>
 
       </Snap.Layout>
@@ -77,11 +80,11 @@ module.exports = React.createClass({
   },
 
   renderBackButton: function(){
-    if( !this.props.showBackButton ){
+    if( !this.state.showBackButton ){
       return;
     }
     return (
-      <UI.Icon name="back" onClick={this.props.back}  className='nav-bar-icon' />
+      <UI.Icon name="back" onClick={this.props.back} style={{margin: '0 20px'}}  className='nav-bar-icon' />
     );
   }
   
