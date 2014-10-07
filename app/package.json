@@ -20,23 +20,23 @@
     "gulp-notify": "^1.3.0",
     "gulp-notify-growl": "~1.0.2",
     "gulp-plumber": "^0.6.2",
-    "gulp-react": "^0.3.3",
+    "gulp-react": "^1.0.2",
     "gulp-replace": "^0.4.0",
     "gulp-run-sequence": "^0.3.2",
     "gulp-shell": "~0.2.8",
     "gulp-uglify": "^0.3.0",
     "gulp-watch": "^0.6.5",
     "jquery": "^2.1.1",
+    "jsx-loader": "^0.11.2",
     "lodash-node": "~2.4.1",
     "promise": "^6.0.0",
-    "react": "^0.11.1",
-    "react-flux": "0.0.9",
-    "react-tools": "^0.11.1",
+    "react": "^0.11.2",
+    "react-flux": "0.0.13",
+    "react-tools": "^0.11.2",
     "react-topui": "0.0.2",
     "underscore": "^1.6.0"
   },
   "devDependencies": {
-    "jsx-loader": "^0.11.0",
     "webpack": "^1.3.3-beta1"
   }
 }

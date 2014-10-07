@@ -3,7 +3,8 @@ var React = require('react');
 var _ = require('underscore');
 var Navigation = require('./nav');
 var LangStore = require('../../flux/stores/lang');
-var LangActions = require('../../flux/actions/lang')
+var LangActions = require('../../flux/actions/lang');
+var AppStateActions = require('../../flux/actions/appState');
 var __ = LangStore._;
 var UI = require('react-topui');
 
@@ -20,14 +21,11 @@ module.exports = React.createClass({
     } 
   },
 
-  setPageTitle: function(){
-    this.props.setPageTitle(__('language'));
-  },
-
+ 
   componentDidMount: function(){
     LangStore.onChange( this.onLanguageChange );
-    this.setPageTitle();
     this.checkSelected();
+    AppStateActions.setTitle(__('language'));
   },
 
   componentWillUnmount: function(){
@@ -36,12 +34,14 @@ module.exports = React.createClass({
 
   onLanguageChange: function(){
     this.setState( this.getStateFromStores() );
-    this.setPageTitle();
     this.checkSelected();
   },
 
   selectLang: function(code){
     LangActions.setLocale(code);
+    setTimeout(function(){
+      AppStateActions.setTitle(__('language'));
+    }, 0);
     return false;
   },
 

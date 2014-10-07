@@ -5,6 +5,7 @@ var Navigation = require('./nav');
 var Ipsum = require('../../components/ipsum');
 var __ = require('../../flux/stores/lang')._
 var UI = require('react-topui');
+var AppStateActions = require('../../flux/actions/appState');
 
 var UserStore = require('../../flux/stores/user');
 
@@ -17,7 +18,7 @@ module.exports = React.createClass({
   },
   
   componentDidMount: function(){
-    this.props.setPageTitle(__('app.name'));
+    AppStateActions.setTitle(__('app.name'));
   },
 
   render: function(){

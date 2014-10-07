@@ -4,6 +4,7 @@ var React = require('react');
 var SubNav = require('../../components/subNav');
 var __ = require('../../flux/stores/lang')._
 var SubNav = require('../../components/subNav');
+var AppStateActions = require('../../flux/actions/appState');
 
 module.exports = React.createClass({
 

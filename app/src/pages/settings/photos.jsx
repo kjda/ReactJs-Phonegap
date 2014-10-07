@@ -3,6 +3,7 @@ var React = require('react');
 var IScroll = require('../../components/iscroll');
 var Navigation = require('./nav');
 var __ = require('../../flux/stores/lang')._
+var AppStateActions = require('../../flux/actions/appState');
 
 
 module.exports = React.createClass({
@@ -12,7 +13,7 @@ module.exports = React.createClass({
     }
   },
   componentDidMount: function(){
-    this.props.setPageTitle(__('settings.photos'));
+    AppStateActions.setTitle(__('settings.photos'));
   },
 
   chnageState: function(field, value){

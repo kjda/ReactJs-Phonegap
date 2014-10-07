@@ -4,10 +4,11 @@ var SubNav = require('./nav');
 var IScroll = require('../../components/iscroll');
 var __ = require('../../flux/stores/lang')._
 var Ipsum = require('../../components/ipsum');
+var AppStateActions = require('../../flux/actions/appState');
 
 module.exports = React.createClass({
  componentDidMount: function(){
-  this.props.setPageTitle(__('Test 1'))
+  AppStateActions.setTitle('Test 1');
 },
 render: function(){
   return (

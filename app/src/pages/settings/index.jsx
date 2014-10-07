@@ -3,8 +3,9 @@
 var React = require('react');
 var IScroll = require('../../components/iscroll');
 var Navigation = require('./nav');
-
+var AppStateActions = require('../../flux/actions/appState');
 var __ = require('../../flux/stores/lang')._
+var UserConstants = require('../../flux/constants/user');
 var UserStore = require('../../flux/stores/user');
 var UserActions = require('../../flux/actions/user');
 
@@ -16,12 +17,15 @@ module.exports = React.createClass({
 
   getStateFromStores: function(){
     return {
-      data: UserStore.state.get('data')
+      data: UserStore.get('data'),
+      isSaving: UserStore.getActionState(UserConstants.EDIT_DATA, 'isSaving'),
+      success:  UserStore.getActionState(UserConstants.EDIT_DATA, 'success')
     }
   },
 
   componentDidMount: function(){
-    this.props.setPageTitle(__('settings'));
+    AppStateActions.setTitle(__('settings'));
+    UserStore.resetActionState(UserConstants.EDIT_DATA);
   },
 
   onDataChange: function(field){
@@ -39,8 +43,11 @@ module.exports = React.createClass({
     return false;
   },
 
-
   render: function() {
+    var successMsg = null;
+    if( this.state.success ){
+      successMsg = <span style={{margin: 15}}><UI.Icon name="arrowup" /> Saved!</span>;
+    }
     return (
       <div>
         <Navigation />
@@ -58,7 +65,9 @@ module.exports = React.createClass({
             <div className="p10">
               <UI.Button 
                   cta 
+                  disabled={this.state.isSaving}
                   onClick={this.save}>{__('Save')}</UI.Button>
+              {successMsg}
             </div>
         </IScroll>
       </div>

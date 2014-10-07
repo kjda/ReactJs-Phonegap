@@ -4,6 +4,8 @@ var userConstants = require('../constants/user');
 
 var loginService = require('../services/login');
 
+var Promise = require('promise');
+
 module.exports = ReactFlux.createActions({
 
 	login: [userConstants.LOGIN, function (email, password) {
@@ -18,9 +20,13 @@ module.exports = ReactFlux.createActions({
 
 	edit: [userConstants.EDIT_DATA, function(username){
 		console.log("UserActions.edit");
-		return {
-			username: username
-		}
+		return new Promise(function(resolve, reject){
+			setTimeout(function(){
+				resolve({
+					username: username
+				});
+			}, 1000);
+		});
 	}]
 	
 });

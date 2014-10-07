@@ -27,7 +27,6 @@ module.exports = React.createClass({
 		return {
 			ready: true,
 			path: null,
-			pageTitle: '',
 			locale: null,
 			routeParams: {},
 			user: UserStore.getData(),
@@ -116,12 +115,6 @@ module.exports = React.createClass({
 			path: path
 		});
 	},
-
-	setPageTitle: function(title){
-		this.setState({
-			pageTitle: title
-		});
-	},
 	
 	isBrowser: function() {
 		var url = document.URL;
@@ -187,7 +180,6 @@ module.exports = React.createClass({
 		return (<LayoutUser page={page} 
 			user={this.state.user}
 			isAuth={this.state.isAuth}
-			pageTitle={this.state.pageTitle}
 			locale={LangStore.getLocale()}
 			showBackButton={showBackButton}
 			back={this.handleBackButton}  />);

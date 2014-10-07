@@ -1,7 +1,7 @@
 var ReactFlux = require('react-flux');
 var constants = require('../constants/user');
 
-module.exports = ReactFlux.createStore({
+var Store = ReactFlux.createStore({
 
   getInitialState: function () {
     return {
@@ -21,47 +21,73 @@ module.exports = ReactFlux.createStore({
     return this.state.get('isAuth');
   }
 
-},[
-  
-  [constants.LOGIN_SUCCESS, function (payload) {
-    this.setState({
+});
+
+
+Store.addHandler(constants.LOGIN, {
+  success: function(payload){
+    this.parent.setState({
       data: payload,
       isAuth: true
     });
-  }],
-
-
-  [constants.LOGIN_FAIL, function (error) {
-    this.setState({
+  },
+  fail: function(){
+    this.parent.setState({
       isAuth: false,
       error: error.message
     });
-  }],
+  }
+});
 
-  [constants.LOGOUT_SUCCESS, function () {
-    console.log("UserStore.logout.success");
-    this.setState({
+Store.addHandler(constants.LOGOUT, {
+  success: function(payload){
+    this.parent.setState({
       data: null,
       isAuth: false
     });
-    console.log("UserStore.logout.success.after");
-  }],
+  },
+  fail: function(){
+    
+  }
+});
 
-  [constants.LOGOUT_FAIL, function () {
-    console.log("UserStore.logout.fail");
+
+Store.addHandler(constants.EDIT_DATA, {
+
+  getInitialState: function(){
+    return {
+      isSaving: false,
+      success: false
+    };
+  },
+
+  before: function(){
     this.setState({
-      data: null,
-      isAuth: false
+      isSaving: true,
+      success: false
     });
-  }],
+  },
 
-  [constants.EDIT_DATA_SUCCESS, function(payload){
-    var data = this.state.get('data');
+  after: function(){
+    this.setState({
+      isSaving: false
+    });
+  },
+
+  success: function(payload){
+    var data = this.parent.get('data');
     data.username = payload.username;
-    this.setState({
+    this.parent.setState({
       data: data
     });
+    this.setState({
+      success: true
+    });
+  },
+  
+  fail: function(){
+    
+  }
+});
 
-  }]
-
-]);
+module.exports = Store;

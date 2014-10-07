@@ -6,7 +6,18 @@ var Snap = require('./snaplayout');
 var Ipsum = require('./ipsum');
 var IScroll = require('./iscroll');
 
+var AppStateStore = require('../flux/stores/appState');
+
 module.exports = React.createClass({
+
+  mixins: [ AppStateStore.mixin() ],
+
+  getStateFromStores: function(){
+    return {
+      pageTitle: AppStateStore.get('title')
+    }
+  },
+
   render: function() {
     return(
       <Snap.Layout>
@@ -49,7 +60,7 @@ module.exports = React.createClass({
               </Snap.Toggler>
             </UI.NavBarItem>
             <UI.NavBarItem center half>
-              {this.props.pageTitle}
+              {this.state.pageTitle}
             </UI.NavBarItem>
             <UI.NavBarItem right quarter>
               {this.renderBackButton()}
