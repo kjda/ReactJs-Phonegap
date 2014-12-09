@@ -125,7 +125,7 @@ module.exports = React.createClass({
 	},
 
 	isIOS7: function(){
-		return this.app.getIOSVersion() >= 7;
+		return this.getIOSVersion() >= 7;
 	},
 
 	getIOSVersion: function() {
