@@ -34,7 +34,6 @@ module.exports = React.createClass({
 	
 	componentDidMount: function(){
 		this.initApp();
-		FastClick.attach(document.body, {});
 		this.router.start(this.routes);
 	},
 
@@ -49,6 +48,7 @@ module.exports = React.createClass({
 		if( this.isIOS() ){
 			this.initIOS();
 		}
+		FastClick.attach(document.body, {});
 	},
 
 	initAndroid: function(){
