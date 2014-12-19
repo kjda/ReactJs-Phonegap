@@ -34,7 +34,7 @@ module.exports = React.createClass({
 	
 	componentDidMount: function(){
 		this.initApp();
-		FastClick.call({}, document.body);
+		FastClick.attach(document.body, {});
 		this.router.start(this.routes);
 	},
 
