@@ -131,7 +131,7 @@ gulp.task('create', function(cb){
 gulp.task('clean-app', function(){
 	return gulp.src('./' + PHONEGAP_APP_DIR, {read: false})
 	.pipe(clean());
-})
+});
 
 gulp.task('create-app', shell.task([
 	'phonegap create ' + PHONEGAP_APP_DIR
@@ -170,7 +170,16 @@ function getPhonegapPluginCommands(){
 	var commands = [];
 	for(var i = 0; i < configs.app.phonegapPlugins.length; i++){
 		var p = configs.app.phonegapPlugins[i];
-		commands.push('phonegap plugin add ' + p.installFrom);
+		var pvars = p.vars;
+		if (pvars) {
+			var varstring = "";
+			for (var j = 0; j < pvars.length; j++) {
+				varstring += " --variable " + pvars[j];
+			}
+			commands.push('phonegap plugin add ' + p.installFrom + varstring);
+		} else {
+			commands.push('phonegap plugin add ' + p.installFrom);
+		}
 	}
 	return commands;
 }
